@@ -32,10 +32,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
-
 
 # typescript
 *.tsbuildinfo
@@ -43,12 +43,28 @@ next-env.d.ts
 local-*
 .claude
 .z-ai-config
+
+# logs
 *.log
 dev.log
 dev.out.log
-test
-prompt
-
 server.log
-# Skills directory
+
+# database (SQLite local data — regenerate with `bun run prisma/seed.ts`)
+/db/*.db
+/db/*.db-journal
+
+# uploads and tool artifacts (user content, not source code)
+/upload/
+/tool-results/
+/download/
+
+# environment tests and examples (not part of the ecommerce)
+/tests/
+/examples/
+
+# Skills directory (Z.ai skill system, not part of CuidoMisPies)
 /skills/
+
+# OS files
+Thumbs.db
