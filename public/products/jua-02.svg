@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FAFAF7"/>
+      <stop offset="100%" stop-color="#F3F1EC"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A9C5B5"/>
+      <stop offset="100%" stop-color="#A9C5B5" stop-opacity="0.85"/>
+    </linearGradient>
+    <radialGradient id="shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#24302F" stop-opacity="0.15"/>
+      <stop offset="70%" stop-color="#24302F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <ellipse cx="300" cy="490" rx="180" ry="22" fill="url(#shadow)"/>
+  
+  <g transform="translate(300, 290)">
+    <ellipse cx="0" cy="0" rx="90" ry="55" fill="url(#accentGrad)" stroke="#24302F" stroke-opacity="0.12" stroke-width="2"/>
+    <ellipse cx="-30" cy="-15" rx="18" ry="12" fill="#A9C5B5"/>
+    <path d="M -70 30 Q -90 60, -80 90 Q -70 110, -40 110" stroke="#24302F" stroke-opacity="0.4" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M 70 30 Q 90 60, 80 90 Q 70 110, 40 110" stroke="#24302F" stroke-opacity="0.4" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <rect x="-20" y="95" width="40" height="20" rx="4" fill="#24302F"/>
+    <rect x="-12" y="100" width="24" height="10" rx="2" fill="#A9C5B5"/>
+    <ellipse cx="-30" cy="-25" rx="40" ry="15" fill="#FAFAF7" fill-opacity="0.25"/>
+  </g>
+  
+  <text x="300" y="555" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="22" font-weight="600" fill="#24302F">Corrector Noche</text>
+</svg>

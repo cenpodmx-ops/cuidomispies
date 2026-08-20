@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FAFAF7"/>
+      <stop offset="100%" stop-color="#F3F1EC"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A9C5B5"/>
+      <stop offset="100%" stop-color="#A9C5B5" stop-opacity="0.85"/>
+    </linearGradient>
+    <radialGradient id="shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#24302F" stop-opacity="0.15"/>
+      <stop offset="70%" stop-color="#24302F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <ellipse cx="300" cy="490" rx="180" ry="22" fill="url(#shadow)"/>
+  
+  <g transform="translate(300, 290)">
+    <path d="M -60 -40 Q -60 -60, -40 -60 L 40 -60 Q 60 -60, 60 -40 L 60 80 Q 60 100, 40 100 L 20 100 Q 0 100, 0 80 L 0 -20 Q 0 -30, -10 -30 L -40 -30 Q -60 -30, -60 -10 Z"
+      fill="url(#accentGrad)" stroke="#24302F" stroke-opacity="0.12" stroke-width="2" opacity="0.92"/>
+    <ellipse cx="-30" cy="-45" rx="22" ry="14" fill="#A9C5B5" stroke="#24302F" stroke-opacity="0.1"/>
+    <path d="M -40 -50 Q -45 -55, -38 -58" stroke="#FAFAF7" stroke-opacity="0.6" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M 30 -50 Q 35 -55, 45 -55" stroke="#FAFAF7" stroke-opacity="0.4" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+  
+  <text x="300" y="555" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="22" font-weight="600" fill="#24302F">Protector Juanete</text>
+</svg>

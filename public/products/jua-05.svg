@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FAFAF7"/>
+      <stop offset="100%" stop-color="#F3F1EC"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A9C5B5"/>
+      <stop offset="100%" stop-color="#A9C5B5" stop-opacity="0.85"/>
+    </linearGradient>
+    <radialGradient id="shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#24302F" stop-opacity="0.15"/>
+      <stop offset="70%" stop-color="#24302F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <ellipse cx="300" cy="490" rx="180" ry="22" fill="url(#shadow)"/>
+  
+  <g transform="translate(300, 290)">
+    <rect x="-45" y="-130" width="90" height="260" rx="45" fill="url(#accentGrad)" stroke="#24302F" stroke-opacity="0.12" stroke-width="2" opacity="0.92"/>
+    <line x1="-45" y1="-70" x2="45" y2="-70" stroke="#FAFAF7" stroke-width="2" stroke-dasharray="4,4" opacity="0.7"/>
+    <line x1="-45" y1="-10" x2="45" y2="-10" stroke="#FAFAF7" stroke-width="2" stroke-dasharray="4,4" opacity="0.7"/>
+    <line x1="-45" y1="50" x2="45" y2="50" stroke="#FAFAF7" stroke-width="2" stroke-dasharray="4,4" opacity="0.7"/>
+    <ellipse cx="-18" cy="0" rx="10" ry="100" fill="#FAFAF7" fill-opacity="0.3"/>
+    <g transform="translate(60, -80)" opacity="0.5">
+      <circle cx="0" cy="0" r="8" fill="none" stroke="#24302F" stroke-width="2"/>
+      <circle cx="0" cy="14" r="8" fill="none" stroke="#24302F" stroke-width="2"/>
+      <line x1="6" y1="6" x2="30" y2="20" stroke="#24302F" stroke-width="2"/>
+      <line x1="6" y1="8" x2="30" y2="-6" stroke="#24302F" stroke-width="2"/>
+    </g>
+  </g>
+  
+  <text x="300" y="555" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="22" font-weight="600" fill="#24302F">Tubo Protector</text>
+</svg>

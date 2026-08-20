@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FAFAF7"/>
+      <stop offset="100%" stop-color="#F3F1EC"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D99C5C"/>
+      <stop offset="100%" stop-color="#D99C5C" stop-opacity="0.85"/>
+    </linearGradient>
+    <radialGradient id="shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#24302F" stop-opacity="0.15"/>
+      <stop offset="70%" stop-color="#24302F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <ellipse cx="300" cy="490" rx="180" ry="22" fill="url(#shadow)"/>
+  
+  <g transform="translate(300, 280)">
+    <path d="M -75 -30 Q -75 -50, -55 -50 L 55 -50 Q 75 -50, 75 -30 L 75 180 Q 75 190, 65 190 L -65 190 Q -75 190, -75 180 Z" fill="url(#accentGrad)"/>
+    <path d="M -75 -30 Q -75 -50, -55 -50 L 55 -50 Q 75 -50, 75 -30 L 75 180 Q 75 190, 65 190 L -65 190 Q -75 190, -75 180 Z" fill="none" stroke="#24302F" stroke-opacity="0.12" stroke-width="2"/>
+    <rect x="-55" y="-58" width="110" height="10" rx="3" fill="#D99C5C" stroke="#24302F" stroke-opacity="0.1"/>
+    <rect x="-30" y="-100" width="60" height="48" rx="6" fill="#24302F"/>
+    <ellipse cx="0" cy="-100" rx="30" ry="6" fill="#24302F" fill-opacity="0.8"/>
+    <rect x="-60" y="20" width="120" height="110" rx="8" fill="#FAFAF7" fill-opacity="0.95"/>
+    <rect x="-60" y="20" width="120" height="6" rx="3" fill="#D99C5C"/>
+    <line x1="-40" y1="45" x2="40" y2="45" stroke="#24302F" stroke-opacity="0.5" stroke-width="2"/>
+    <line x1="-30" y1="62" x2="30" y2="62" stroke="#24302F" stroke-opacity="0.3" stroke-width="2"/>
+    <line x1="-35" y1="78" x2="35" y2="78" stroke="#24302F" stroke-opacity="0.3" stroke-width="2"/>
+    <line x1="-25" y1="100" x2="25" y2="100" stroke="#D99C5C" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <text x="300" y="555" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="22" font-weight="600" fill="#24302F">Urea 60</text>
+</svg>

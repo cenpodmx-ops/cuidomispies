@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <!-- Isotipo independiente: cinco dedos abstractos sobre base -->
+  <g transform="translate(40, 40)">
+    <!-- Base de apoyo (palma/soporte) en sage -->
+    <path d="M -30 10 Q -30 22, -18 22 L 18 22 Q 30 22, 30 10 L 30 4 Q 30 -2, 24 -2 L -24 -2 Q -30 -2, -30 4 Z"
+      fill="#A9C5B5"/>
+    <!-- Cinco dedos abstractos -->
+    <rect x="-26" y="-24" width="8" height="26" rx="4" fill="#176B6B"/>
+    <rect x="-14" y="-30" width="8" height="32" rx="4" fill="#176B6B"/>
+    <rect x="-2" y="-32" width="8" height="34" rx="4" fill="#176B6B"/>
+    <rect x="10" y="-30" width="8" height="32" rx="4" fill="#A9C5B5"/>
+    <rect x="22" y="-22" width="6" height="24" rx="3" fill="#A9C5B5"/>
+  </g>
+</svg>

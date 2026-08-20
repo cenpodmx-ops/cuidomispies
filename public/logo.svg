@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+  <defs>
+    <style>
+      .word { font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+    </style>
+  </defs>
+  <!-- Isotipo: cinco dedos abstractos sobre una base de apoyo -->
+  <g transform="translate(40, 40)">
+    <!-- Base de apoyo (palma/soporte) -->
+    <path d="M -22 8 Q -22 16, -14 16 L 14 16 Q 22 16, 22 8 L 22 2 Q 22 -2, 18 -2 L -18 -2 Q -22 -2, -22 2 Z"
+      fill="#A9C5B5"/>
+    <!-- Cinco dedos abstractos (teal y salvia alternados) -->
+    <rect x="-19" y="-18" width="6" height="20" rx="3" fill="#176B6B"/>
+    <rect x="-10" y="-22" width="6" height="24" rx="3" fill="#176B6B"/>
+    <rect x="-1" y="-24" width="6" height="26" rx="3" fill="#176B6B"/>
+    <rect x="8" y="-22" width="6" height="24" rx="3" fill="#A9C5B5"/>
+    <rect x="17" y="-16" width="5" height="18" rx="2.5" fill="#A9C5B5"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="78" y="50" class="word" font-size="30" fill="#176B6B">Cuido</text>
+  <text x="178" y="50" class="word" font-size="30" fill="#A9C5B5">Mis</text>
+  <text x="219" y="50" class="word" font-size="30" fill="#176B6B">Pies</text>
+  <!-- Punto de la "i" en Pies reemplazado por detalle de dedo -->
+  <circle cx="228" cy="26" r="3.5" fill="#A9C5B5"/>
+</svg>

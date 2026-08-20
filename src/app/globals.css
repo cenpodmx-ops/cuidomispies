@@ -1,0 +1,262 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* CuidoMisPies brand tokens */
+  --color-cmp-teal: #176B6B;
+  --color-cmp-teal-dark: #0F5253;
+  --color-cmp-teal-light: #2A8585;
+  --color-cmp-sage: #A9C5B5;
+  --color-cmp-sage-light: #C4D8CC;
+  --color-cmp-beige: #E9DDCE;
+  --color-cmp-beige-light: #F3EBE0;
+  --color-cmp-ivory: #FAFAF7;
+  --color-cmp-graphite: #24302F;
+  --color-cmp-graphite-soft: #4A5856;
+  --color-cmp-amber: #D99C5C;
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Backgrounds */
+  --background: #FAFAF7; /* Marfil */
+  --foreground: #24302F; /* Grafito */
+
+  /* Cards & surfaces */
+  --card: #FFFFFF;
+  --card-foreground: #24302F;
+  --popover: #FFFFFF;
+  --popover-foreground: #24302F;
+
+  /* Brand primary = Teal */
+  --primary: #176B6B;
+  --primary-foreground: #FAFAF7;
+
+  /* Secondary = Sage */
+  --secondary: #EAF2EE;
+  --secondary-foreground: #24302F;
+
+  /* Muted = soft beige-gray */
+  --muted: #F3F1EC;
+  --muted-foreground: #6B7674;
+
+  /* Accent = Beige warm */
+  --accent: #F3EBE0;
+  --accent-foreground: #24302F;
+
+  --destructive: #C0492F;
+  --border: #E3E0D8;
+  --input: #E3E0D8;
+  --ring: #176B6B;
+
+  --chart-1: #176B6B;
+  --chart-2: #A9C5B5;
+  --chart-3: #D99C5C;
+  --chart-4: #6B7674;
+  --chart-5: #E9DDCE;
+
+  --sidebar: #FAFAF7;
+  --sidebar-foreground: #24302F;
+  --sidebar-primary: #176B6B;
+  --sidebar-primary-foreground: #FAFAF7;
+  --sidebar-accent: #F3EBE0;
+  --sidebar-accent-foreground: #24302F;
+  --sidebar-border: #E3E0D8;
+  --sidebar-ring: #176B6B;
+}
+
+.dark {
+  --background: #1A2423;
+  --foreground: #FAFAF7;
+  --card: #24302F;
+  --card-foreground: #FAFAF7;
+  --popover: #24302F;
+  --popover-foreground: #FAFAF7;
+  --primary: #2A8585;
+  --primary-foreground: #FAFAF7;
+  --secondary: #2F3D3B;
+  --secondary-foreground: #FAFAF7;
+  --muted: #2F3D3B;
+  --muted-foreground: #A9C5B5;
+  --accent: #3A4A47;
+  --accent-foreground: #FAFAF7;
+  --destructive: #E0604A;
+  --border: #3A4A47;
+  --input: #3A4A47;
+  --ring: #2A8585;
+  --chart-1: #2A8585;
+  --chart-2: #A9C5B5;
+  --chart-3: #D99C5C;
+  --chart-4: #6B7674;
+  --chart-5: #E9DDCE;
+  --sidebar: #24302F;
+  --sidebar-foreground: #FAFAF7;
+  --sidebar-primary: #2A8585;
+  --sidebar-primary-foreground: #FAFAF7;
+  --sidebar-accent: #3A4A47;
+  --sidebar-accent-foreground: #FAFAF7;
+  --sidebar-border: #3A4A47;
+  --sidebar-ring: #2A8585;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv01", "cv02";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4 {
+    @apply tracking-tight;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* Custom scrollbar */
+@layer utilities {
+  .scrollbar-cmp {
+    scrollbar-width: thin;
+    scrollbar-color: var(--cmp-sage) transparent;
+  }
+  .scrollbar-cmp::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-cmp::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-cmp::-webkit-scrollbar-thumb {
+    background-color: #A9C5B5;
+    border-radius: 9999px;
+  }
+  .scrollbar-cmp::-webkit-scrollbar-thumb:hover {
+    background-color: #176B6B;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(36, 48, 47, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(36, 48, 47, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .mask-fade-r {
+    -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+    mask-image: linear-gradient(to right, black 80%, transparent 100%);
+  }
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  }
+}
+
+/* Animations */
+@keyframes cmp-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes cmp-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes cmp-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes cmp-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-fade-up {
+  animation: cmp-fade-up 0.5s ease-out both;
+}
+.animate-fade-in {
+  animation: cmp-fade-in 0.4s ease-out both;
+}
+.animate-scale-in {
+  animation: cmp-scale-in 0.3s ease-out both;
+}
+.animate-marquee {
+  animation: cmp-marquee 30s linear infinite;
+}
+
+/* Shadcn button focus ring adjustment for brand */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
