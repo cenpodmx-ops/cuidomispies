@@ -1,0 +1,21 @@
+{
+  "type": "footer",
+  "name": "Pie de página",
+  "sections": {
+    "footer": {
+      "type": "cmp-footer",
+      "settings": {
+        "show_trust_band": true,
+        "brand_text": "Productos especializados, kits y rutinas para cuidar mejor tus pies.",
+        "menu_1_heading": "Comprar",
+        "menu_1": "",
+        "menu_2_heading": "Ayuda",
+        "menu_2": "",
+        "newsletter_heading": "Rutinas, consejos y promociones",
+        "newsletter_text": "Sin spam. Solo contenido útil para cuidar mejor tus pies.",
+        "disclaimer": "Los productos y recomendaciones de este sitio no sustituyen una valoración profesional. Ante dolor, lesiones, pérdida de sensibilidad o cambios persistentes, consulta a un profesional de la salud."
+      }
+    }
+  },
+  "order": ["footer"]
+}

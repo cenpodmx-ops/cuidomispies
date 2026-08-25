@@ -1,0 +1,13 @@
+{% liquid
+  assign price_target = product.selected_or_first_available_variant
+  assign compare_at_price = price_target.compare_at_price
+  assign price = price_target.price
+%}
+
+<div class="cmp-price{% if compare_at_price > price %} cmp-price--sale{% endif %}" data-price-wrapper>
+  <span class="cmp-price__current" data-product-price>{{ price | money }}</span>
+  {% if compare_at_price > price %}
+    <s class="cmp-price__compare">{{ compare_at_price | money }}</s>
+    <span class="visually-hidden">Precio de oferta</span>
+  {% endif %}
+</div>

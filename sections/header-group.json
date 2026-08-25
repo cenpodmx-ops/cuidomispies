@@ -1,0 +1,32 @@
+{
+  "type": "header",
+  "name": "Encabezado",
+  "sections": {
+    "announcement": {
+      "type": "cmp-announcement-bar",
+      "settings": {
+        "show_bar": true,
+        "message_1": "Envíos a todo México",
+        "message_2": "Compra segura",
+        "message_3": "Atención profesional",
+        "slogan": "Soluciones para cada paso"
+      }
+    },
+    "header": {
+      "type": "cmp-header",
+      "blocks": {
+        "hongos": { "type": "need", "settings": { "title": "Hongos", "subtitle": "Uñas, piel y calzado", "url": "/collections/hongos", "icon": "shield" } },
+        "diabetes": { "type": "need", "settings": { "title": "Cuidado en diabetes", "subtitle": "Protección e hidratación", "url": "/collections/cuidado-pie-diabetes", "icon": "heart" } },
+        "piel_seca": { "type": "need", "settings": { "title": "Talones y piel seca", "subtitle": "Resequedad y piel engrosada", "url": "/collections/talones-piel-seca", "icon": "drop" } },
+        "sudor": { "type": "need", "settings": { "title": "Sudor y mal olor", "subtitle": "Pies y calzado", "url": "/collections/sudor-mal-olor", "icon": "sparkles" } },
+        "juanetes": { "type": "need", "settings": { "title": "Juanetes y dedos", "subtitle": "Roce, separación y protección", "url": "/collections/juanetes-dedos", "icon": "foot" } },
+        "callos": { "type": "need", "settings": { "title": "Callos, roce y presión", "subtitle": "Protección localizada", "url": "/collections/callos-roce-presion", "icon": "foot" } },
+        "confort": { "type": "need", "settings": { "title": "Talón y confort", "subtitle": "Amortiguación y comodidad", "url": "/collections/talon-confort", "icon": "foot" } },
+        "kits": { "type": "need", "settings": { "title": "Kits por necesidad", "subtitle": "Rutinas completas", "url": "/collections/kits", "icon": "sparkles" } }
+      },
+      "block_order": ["hongos", "diabetes", "piel_seca", "sudor", "juanetes", "callos", "confort", "kits"],
+      "settings": { "menu": "", "sticky": true }
+    }
+  },
+  "order": ["announcement", "header"]
+}

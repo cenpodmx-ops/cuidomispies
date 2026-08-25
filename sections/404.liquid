@@ -1,0 +1,13 @@
+<section class="section-spacing">
+  <div class="page-width empty-state">
+    {% render 'icon', name: 'foot' %}
+    <p class="eyebrow">Error 404</p>
+    <h1>Esta página dio un paso de más</h1>
+    <p>No encontramos la dirección que buscabas. Puedes regresar al inicio o explorar los productos.</p>
+    <div class="cmp-cart-empty__actions"><a class="button button--primary" href="{{ routes.root_url }}">Volver al inicio</a><a class="button button--secondary" href="{{ routes.all_products_collection_url }}">Ver productos</a></div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Página no encontrada", "settings": [] }
+{% endschema %}

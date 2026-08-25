@@ -1,0 +1,32 @@
+{
+  "current": {
+    "color_primary": "#176B6B",
+    "color_primary_dark": "#105858",
+    "color_secondary": "#A9C5B5",
+    "color_accent": "#E9DDCE",
+    "color_background": "#FAFAF7",
+    "color_text": "#24302F",
+    "type_heading_font": "work_sans_n7",
+    "type_body_font": "work_sans_n4",
+    "page_width": 1300,
+    "page_margin": 20,
+    "free_shipping_threshold": 600,
+    "cart_drawer_enabled": true
+  },
+  "presets": {
+    "CuidoMisPies": {
+      "color_primary": "#176B6B",
+      "color_primary_dark": "#105858",
+      "color_secondary": "#A9C5B5",
+      "color_accent": "#E9DDCE",
+      "color_background": "#FAFAF7",
+      "color_text": "#24302F",
+      "type_heading_font": "work_sans_n7",
+      "type_body_font": "work_sans_n4",
+      "page_width": 1300,
+      "page_margin": 20,
+      "free_shipping_threshold": 600,
+      "cart_drawer_enabled": true
+    }
+  }
+}

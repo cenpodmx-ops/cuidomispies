@@ -1,0 +1,27 @@
+<section class="cmp-collections-page section-spacing">
+  <div class="page-width">
+    <header class="section-heading section-heading--center"><p class="eyebrow">Compra por necesidad</p><h1>Todas las colecciones</h1><p>Encuentra productos y rutinas agrupados para que elegir sea más sencillo.</p></header>
+    <div class="cmp-collections-grid">
+      {% for collection in collections %}
+        {% unless collection.handle == 'frontpage' %}
+          <a class="cmp-collection-card" href="{{ collection.url }}">
+            <div>
+              {% if collection.featured_image %}
+                {{ collection.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 990px) 33vw, 100vw', alt: collection.featured_image.alt | default: collection.title }}
+              {% else %}
+                <span>{% render 'icon', name: 'foot' %}</span>
+              {% endif %}
+            </div>
+            <h2>{{ collection.title }}</h2>
+            {% if collection.description != blank %}<p>{{ collection.description | strip_html | truncatewords: 18 }}</p>{% endif %}
+            <small>{{ collection.products_count }} productos</small>
+          </a>
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Lista de colecciones", "settings": [], "presets": [{ "name": "Lista de colecciones" }] }
+{% endschema %}

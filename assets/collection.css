@@ -1,0 +1,28 @@
+.cmp-collection__hero { display: grid; grid-template-columns: 1fr .75fr; gap: clamp(1.5rem, 5vw, 4rem); align-items: center; margin-bottom: 2rem; padding: clamp(1.5rem, 4vw, 3rem); border-radius: var(--radius-card); background: var(--color-background-soft); }
+.cmp-collection__hero h1 { margin: .25rem 0 .8rem; }
+.cmp-collection__description { color: var(--color-text-muted); }
+.cmp-collection__hero img { width: 100%; max-height: 24rem; border-radius: var(--radius-card); object-fit: cover; }
+.cmp-education { max-width: 58rem; margin: 0 auto 2rem; color: var(--color-text-muted); }
+.cmp-collection-tools { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin: 1.5rem 0; padding: .75rem 0; border-block: 1px solid var(--color-border); }
+.cmp-collection-tools p { margin: 0; color: var(--color-text-muted); }
+.cmp-sort { display: flex; align-items: center; gap: .6rem; font-size: .9rem; }
+.cmp-sort select { min-height: 2.6rem; padding: .5rem 2.25rem .5rem .75rem; }
+.cmp-filter { position: relative; }
+.cmp-filter > summary { display: flex; align-items: center; gap: .4rem; font-weight: 750; cursor: pointer; }
+.cmp-filter > summary svg { width: .9rem; }
+.cmp-filter__panel { position: absolute; top: calc(100% + .85rem); left: 0; z-index: 10; width: min(28rem, calc(100vw - 2rem)); max-height: 70vh; overflow: auto; padding: 1.2rem; border: 1px solid var(--color-border); border-radius: var(--radius-card); background: #fff; box-shadow: var(--shadow-card); }
+.cmp-filter fieldset { display: grid; gap: .5rem; margin: 0 0 1rem; padding: 0 0 1rem; border: 0; border-bottom: 1px solid var(--color-border); }
+.cmp-filter legend { margin-bottom: .6rem; font-weight: 750; }
+.cmp-filter label { display: flex; gap: .5rem; align-items: center; }
+.cmp-filter input[type='checkbox'] { width: 1rem; height: 1rem; }
+.cmp-filter__price { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.cmp-filter__price label { display: grid; }
+.cmp-filter__price input { width: 100%; }
+.cmp-filter__actions { display: flex; justify-content: space-between; align-items: center; }
+.cmp-quiz-banner { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; margin-top: clamp(3.5rem, 7vw, 6rem); padding: clamp(1.5rem, 4vw, 2.5rem); border-radius: var(--radius-card); background: var(--color-secondary); }
+.cmp-quiz-banner > div { display: flex; align-items: center; gap: 1rem; }
+.cmp-quiz-banner > div > svg { width: 2.5rem; min-width: 2.5rem; }
+.cmp-quiz-banner h2 { margin: .25rem 0 0; }
+.cmp-collection > .page-width > .cmp-safety-note { max-width: 52rem; margin: 2rem auto 0; }
+
+@media (max-width: 749px) { .cmp-collection__hero { grid-template-columns: 1fr; } .cmp-collection-tools { flex-wrap: wrap; } .cmp-quiz-banner { align-items: flex-start; flex-direction: column; } }

@@ -1,0 +1,103 @@
+<footer class="cmp-footer">
+  {% if section.settings.show_trust_band %}
+    <div class="cmp-footer__trust">
+      <div class="cmp-container cmp-footer__trust-grid">
+        <div>{% render 'icon', name: 'truck' %}<span><strong>Envíos a todo México</strong><small>Opciones visibles antes de pagar</small></span></div>
+        <div>{% render 'icon', name: 'shield' %}<span><strong>Compra segura</strong><small>Checkout protegido por Shopify</small></span></div>
+        <div>{% render 'icon', name: 'cart' %}<span><strong>Múltiples pagos</strong><small>Según la pasarela configurada</small></span></div>
+        <div>{% render 'icon', name: 'professional' %}<span><strong>Atención profesional</strong><small>Orientación para elegir mejor</small></span></div>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="cmp-container cmp-footer__main">
+    <div class="cmp-footer__brand">
+      <a href="{{ routes.root_url }}" aria-label="Inicio">
+        <img src="{{ 'cmp-logo.svg' | asset_url }}" width="220" height="54" alt="CuidoMisPies">
+      </a>
+      <p>{{ section.settings.brand_text }}</p>
+      <div class="cmp-footer__social">
+        {% if settings.instagram_url != blank %}<a href="{{ settings.instagram_url }}" aria-label="Instagram">{% render 'icon', name: 'instagram' %}</a>{% endif %}
+        {% if settings.facebook_url != blank %}<a href="{{ settings.facebook_url }}" aria-label="Facebook">{% render 'icon', name: 'facebook' %}</a>{% endif %}
+      </div>
+    </div>
+
+    <div class="cmp-footer__column">
+      <h2>{{ section.settings.menu_1_heading }}</h2>
+      <ul>
+        {% if section.settings.menu_1 != blank %}
+          {% for link in section.settings.menu_1.links %}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}
+        {% else %}
+          <li><a href="{{ routes.collections_url }}/hongos">Hongos</a></li>
+          <li><a href="{{ routes.collections_url }}/cuidado-pie-diabetes">Diabetes</a></li>
+          <li><a href="{{ routes.collections_url }}/talones-piel-seca">Piel seca y talones</a></li>
+          <li><a href="{{ routes.collections_url }}/sudor-mal-olor">Sudor y olor</a></li>
+          <li><a href="{{ routes.collections_url }}/juanetes-dedos">Juanetes y dedos</a></li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div class="cmp-footer__column">
+      <h2>{{ section.settings.menu_2_heading }}</h2>
+      <ul>
+        {% if section.settings.menu_2 != blank %}
+          {% for link in section.settings.menu_2.links %}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}
+        {% else %}
+          <li><a href="/pages/preguntas-frecuentes">Preguntas frecuentes</a></li>
+          <li><a href="/pages/envios-y-entregas">Envíos y entregas</a></li>
+          <li><a href="/pages/devoluciones">Devoluciones</a></li>
+          <li><a href="/pages/orientacion">Orientación profesional</a></li>
+          <li><a href="{{ routes.search_url }}">Buscar</a></li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div class="cmp-footer__newsletter">
+      <h2>{{ section.settings.newsletter_heading }}</h2>
+      <p>{{ section.settings.newsletter_text }}</p>
+      {% form 'customer', class: 'cmp-footer__form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label class="visually-hidden" for="FooterEmail-{{ section.id }}">Correo electrónico</label>
+        <input id="FooterEmail-{{ section.id }}" class="cmp-input" type="email" name="contact[email]" placeholder="tu@correo.com" required autocomplete="email">
+        <button class="cmp-button cmp-button--light" type="submit">Suscribirme</button>
+        {% if form.posted_successfully? %}<p class="cmp-form-success">Gracias por suscribirte.</p>{% endif %}
+        {{ form.errors | default_errors }}
+      {% endform %}
+    </div>
+  </div>
+
+  <div class="cmp-container cmp-footer__bottom">
+    <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. Soluciones para cada paso.</p>
+    <nav aria-label="Políticas">
+      {% if shop.privacy_policy %}<a href="{{ shop.privacy_policy.url }}">Aviso de privacidad</a>{% endif %}
+      {% if shop.terms_of_service %}<a href="{{ shop.terms_of_service.url }}">Términos y condiciones</a>{% endif %}
+      {% if shop.shipping_policy %}<a href="{{ shop.shipping_policy.url }}">Política de envíos</a>{% endif %}
+      {% if shop.refund_policy %}<a href="{{ shop.refund_policy.url }}">Devoluciones</a>{% endif %}
+    </nav>
+    <div class="cmp-footer__payments">
+      {% for type in shop.enabled_payment_types %}{{ type | payment_type_svg_tag }}{% endfor %}
+    </div>
+  </div>
+
+  <div class="cmp-container cmp-footer__disclaimer">
+    <p>{{ section.settings.disclaimer }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pie de página",
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "checkbox", "id": "show_trust_band", "label": "Mostrar franja de confianza", "default": true },
+    { "type": "textarea", "id": "brand_text", "label": "Texto de marca", "default": "Productos especializados, kits y rutinas para cuidar mejor tus pies." },
+    { "type": "text", "id": "menu_1_heading", "label": "Título menú 1", "default": "Comprar" },
+    { "type": "link_list", "id": "menu_1", "label": "Menú 1" },
+    { "type": "text", "id": "menu_2_heading", "label": "Título menú 2", "default": "Ayuda" },
+    { "type": "link_list", "id": "menu_2", "label": "Menú 2" },
+    { "type": "text", "id": "newsletter_heading", "label": "Título newsletter", "default": "Rutinas, consejos y promociones" },
+    { "type": "textarea", "id": "newsletter_text", "label": "Texto newsletter", "default": "Sin spam. Solo contenido útil para cuidar mejor tus pies." },
+    { "type": "textarea", "id": "disclaimer", "label": "Aviso de salud", "default": "Los productos y recomendaciones de este sitio no sustituyen una valoración profesional. Ante dolor, lesiones, pérdida de sensibilidad o cambios persistentes, consulta a un profesional de la salud." }
+  ]
+}
+{% endschema %}

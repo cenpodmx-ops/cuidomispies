@@ -1,0 +1,30 @@
+{% style %}
+  {{ settings.type_body_font | font_face: font_display: 'swap' }}
+  {{ settings.type_body_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
+  {{ settings.type_heading_font | font_face: font_display: 'swap' }}
+
+  :root {
+    --cmp-font-body: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+    --cmp-font-heading: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }};
+    --cmp-page-width: {{ settings.page_width }}px;
+    --cmp-page-margin: {{ settings.page_margin }}px;
+    --cmp-teal: {{ settings.color_primary }};
+    --cmp-teal-dark: {{ settings.color_primary_dark }};
+    --cmp-sage: {{ settings.color_secondary }};
+    --cmp-beige: {{ settings.color_accent }};
+    --cmp-ivory: {{ settings.color_background }};
+    --cmp-graphite: {{ settings.color_text }};
+    --cmp-white: #ffffff;
+    --cmp-muted: #667471;
+    --cmp-border: #dfe4df;
+    --cmp-success: #2d7554;
+    --cmp-warning: #a85d20;
+    --cmp-danger: #a43d2e;
+    --cmp-radius-sm: 10px;
+    --cmp-radius: 16px;
+    --cmp-radius-lg: 24px;
+    --cmp-shadow-sm: 0 2px 12px rgb(36 48 47 / 8%);
+    --cmp-shadow: 0 18px 50px rgb(36 48 47 / 12%);
+    --cmp-transition: 180ms ease;
+  }
+{% endstyle %}

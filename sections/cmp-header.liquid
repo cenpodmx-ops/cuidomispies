@@ -1,0 +1,131 @@
+<header class="cmp-header{% if section.settings.sticky %} cmp-header--sticky{% endif %}">
+  <div class="cmp-container cmp-header__inner">
+    <button class="cmp-icon-button cmp-header__menu-button" type="button" data-mobile-menu-open aria-controls="MobileMenu" aria-expanded="false" aria-label="Abrir menú">
+      {% render 'icon', name: 'menu' %}
+    </button>
+
+    <a class="cmp-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} - Inicio">
+      {% if settings.logo != blank %}
+        {{ settings.logo | image_url: width: 440 | image_tag: widths: '180, 260, 360, 440', sizes: '(max-width: 749px) 150px, 190px', width: settings.logo.width, height: settings.logo.height, alt: shop.name }}
+      {% else %}
+        <img src="{{ 'cmp-logo.svg' | asset_url }}" width="220" height="54" alt="CuidoMisPies">
+      {% endif %}
+    </a>
+
+    <nav class="cmp-header__nav" aria-label="Navegación principal">
+      <details class="cmp-nav-dropdown">
+        <summary>¿Qué quieres cuidar? {% render 'icon', name: 'chevron' %}</summary>
+        <div class="cmp-nav-dropdown__panel">
+          <div class="cmp-nav-dropdown__grid">
+            {% for block in section.blocks %}
+              <a class="cmp-nav-need" href="{{ block.settings.url | default: routes.collections_url }}" {{ block.shopify_attributes }}>
+                <span class="cmp-nav-need__icon">{% render 'icon', name: block.settings.icon %}</span>
+                <span>
+                  <strong>{{ block.settings.title }}</strong>
+                  <small>{{ block.settings.subtitle }}</small>
+                </span>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </details>
+
+      {% if section.settings.menu != blank %}
+        {% for link in section.settings.menu.links %}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {% endfor %}
+      {% else %}
+        <a href="{{ routes.collections_url }}/kits">Kits y rutinas</a>
+        <a href="{{ routes.all_products_collection_url }}">Productos</a>
+        <a href="/pages/encuentra-tu-rutina">Encuentra tu rutina</a>
+        <a href="/pages/orientacion">Orientación</a>
+      {% endif %}
+    </nav>
+
+    <div class="cmp-header__actions">
+      <form class="cmp-header__search" action="{{ routes.search_url }}" method="get" role="search">
+        <label class="visually-hidden" for="HeaderSearch">Buscar productos</label>
+        {% render 'icon', name: 'search' %}
+        <input id="HeaderSearch" type="search" name="q" value="{{ search.terms | escape }}" placeholder="¿Qué necesitas cuidar?">
+        <input type="hidden" name="type" value="product">
+      </form>
+
+      {% if shop.customer_accounts_enabled %}
+        <a class="cmp-icon-button cmp-header__account" href="{{ routes.account_url }}" aria-label="Mi cuenta">
+          {% render 'icon', name: 'account' %}
+        </a>
+      {% endif %}
+
+      <a class="cmp-icon-button cmp-header__cart" href="{{ routes.cart_url }}" data-cart-open aria-label="Carrito con {{ cart.item_count }} productos">
+        {% render 'icon', name: 'cart' %}
+        <span class="cmp-header__cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="MobileMenu" class="cmp-mobile-menu" data-mobile-menu hidden>
+    <button class="cmp-mobile-menu__overlay" type="button" data-mobile-menu-overlay aria-label="Cerrar menú"></button>
+    <nav class="cmp-mobile-menu__panel" aria-label="Navegación móvil">
+      <div class="cmp-mobile-menu__header">
+        <img src="{{ 'cmp-logo.svg' | asset_url }}" width="180" height="44" alt="CuidoMisPies">
+        <button class="cmp-icon-button" type="button" data-mobile-menu-close aria-label="Cerrar menú">{% render 'icon', name: 'close' %}</button>
+      </div>
+      <p class="cmp-mobile-menu__label">¿Qué quieres cuidar?</p>
+      <div class="cmp-mobile-menu__needs">
+        {% for block in section.blocks %}
+          <a href="{{ block.settings.url | default: routes.collections_url }}">
+            <span>{% render 'icon', name: block.settings.icon %}</span>
+            <span><strong>{{ block.settings.title }}</strong><small>{{ block.settings.subtitle }}</small></span>
+            {% render 'icon', name: 'chevron' %}
+          </a>
+        {% endfor %}
+      </div>
+      <div class="cmp-mobile-menu__links">
+        {% if section.settings.menu != blank %}
+          {% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}
+        {% else %}
+          <a href="{{ routes.collections_url }}/kits">Kits y rutinas</a>
+          <a href="{{ routes.all_products_collection_url }}">Todos los productos</a>
+          <a href="/pages/encuentra-tu-rutina">Encuentra tu rutina</a>
+          <a href="/pages/orientacion">Orientación</a>
+        {% endif %}
+      </div>
+    </nav>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Encabezado",
+  "enabled_on": { "groups": ["header"] },
+  "max_blocks": 8,
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menú principal" },
+    { "type": "checkbox", "id": "sticky", "label": "Encabezado fijo", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "need",
+      "name": "Necesidad",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "default": "Hongos" },
+        { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "Uñas, piel y calzado" },
+        { "type": "url", "id": "url", "label": "Enlace" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "default": "shield",
+          "options": [
+            { "value": "shield", "label": "Escudo" },
+            { "value": "heart", "label": "Corazón" },
+            { "value": "drop", "label": "Gota" },
+            { "value": "foot", "label": "Pie" },
+            { "value": "sparkles", "label": "Cuidado diario" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

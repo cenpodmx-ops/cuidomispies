@@ -1,0 +1,30 @@
+{% if section.settings.show_bar %}
+  <aside class="cmp-announcement" aria-label="Información de la tienda">
+    <div class="cmp-container cmp-announcement__inner">
+      {% if section.settings.message_1 != blank %}
+        <span>{% render 'icon', name: 'truck' %} {{ section.settings.message_1 }}</span>
+      {% endif %}
+      {% if section.settings.message_2 != blank %}
+        <span>{% render 'icon', name: 'shield' %} {{ section.settings.message_2 }}</span>
+      {% endif %}
+      {% if section.settings.message_3 != blank %}
+        <span>{% render 'icon', name: 'professional' %} {{ section.settings.message_3 }}</span>
+      {% endif %}
+      <span class="cmp-announcement__slogan">{{ section.settings.slogan }}</span>
+    </div>
+  </aside>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Barra de anuncios",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "checkbox", "id": "show_bar", "label": "Mostrar barra", "default": true },
+    { "type": "text", "id": "message_1", "label": "Mensaje 1", "default": "Envíos a todo México" },
+    { "type": "text", "id": "message_2", "label": "Mensaje 2", "default": "Compra segura" },
+    { "type": "text", "id": "message_3", "label": "Mensaje 3", "default": "Atención profesional" },
+    { "type": "text", "id": "slogan", "label": "Slogan", "default": "Soluciones para cada paso" }
+  ]
+}
+{% endschema %}

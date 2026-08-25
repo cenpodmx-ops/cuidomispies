@@ -1,0 +1,90 @@
+<aside
+  class="cmp-cart-drawer"
+  data-cart-drawer
+  data-free-shipping="{{ settings.free_shipping_threshold }}"
+  data-drawer-enabled="{{ settings.cart_drawer_enabled }}"
+  hidden
+>
+  <button class="cmp-cart-drawer__overlay" type="button" data-cart-overlay aria-label="Cerrar carrito"></button>
+  <section class="cmp-cart-drawer__panel" data-cart-panel role="dialog" aria-modal="true" aria-labelledby="CartDrawerTitle">
+    <header class="cmp-cart-drawer__header">
+      <div>
+        <span class="cmp-section__eyebrow">Tu compra</span>
+        <h2 id="CartDrawerTitle">Carrito</h2>
+      </div>
+      <button class="cmp-icon-button" type="button" data-cart-close aria-label="Cerrar carrito">
+        {% render 'icon', name: 'close' %}
+      </button>
+    </header>
+
+    {% if settings.free_shipping_threshold > 0 %}
+      {%- liquid
+        assign threshold_cents = settings.free_shipping_threshold | times: 100
+        assign remaining = threshold_cents | minus: cart.total_price
+        assign progress = cart.total_price | times: 100.0 | divided_by: threshold_cents | at_most: 100
+      -%}
+      <div class="cmp-cart-shipping">
+        <p data-shipping-text>
+          {% if remaining > 0 %}
+            Te faltan {{ remaining | money }} para envío gratis.
+          {% else %}
+            ¡Tu pedido tiene envío gratis!
+          {% endif %}
+        </p>
+        <div class="cmp-cart-shipping__track" aria-hidden="true">
+          <span data-shipping-progress style="width: {{ progress }}%"></span>
+        </div>
+      </div>
+    {% endif %}
+
+    <p class="cmp-cart-error" data-cart-error role="alert" hidden></p>
+
+    <div class="cmp-cart-drawer__items" data-cart-items>
+      {% for item in cart.items %}
+        <article class="cmp-cart-item" data-cart-item>
+          <a class="cmp-cart-item__image" href="{{ item.url }}" tabindex="-1">
+            {% if item.image %}
+              {{ item.image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 180', sizes: '90px', alt: item.product.title }}
+            {% endif %}
+          </a>
+          <div class="cmp-cart-item__content">
+            <div>
+              <a class="cmp-cart-item__title" href="{{ item.url }}">{{ item.product.title }}</a>
+              {% unless item.product.has_only_default_variant %}
+                <p class="cmp-cart-item__variant">{{ item.variant.title }}</p>
+              {% endunless %}
+            </div>
+            <button class="cmp-cart-item__remove" type="button" data-cart-change="{{ forloop.index }}" data-cart-quantity="0" aria-label="Eliminar {{ item.product.title | escape }}">Eliminar</button>
+            <div class="cmp-cart-item__bottom">
+              <div class="cmp-quantity cmp-quantity--small">
+                <button type="button" data-cart-change="{{ forloop.index }}" data-cart-quantity="{{ item.quantity | minus: 1 | at_least: 0 }}" aria-label="Reducir cantidad">−</button>
+                <span aria-label="Cantidad">{{ item.quantity }}</span>
+                <button type="button" data-cart-change="{{ forloop.index }}" data-cart-quantity="{{ item.quantity | plus: 1 }}" aria-label="Aumentar cantidad">+</button>
+              </div>
+              <strong>{{ item.final_line_price | money }}</strong>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    <div class="cmp-cart-empty" data-cart-empty {% if cart.item_count > 0 %}hidden{% endif %}>
+      <span class="cmp-cart-empty__icon">{% render 'icon', name: 'cart' %}</span>
+      <h3>Tu carrito está vacío</h3>
+      <p>Explora soluciones especializadas para lo que quieres cuidar.</p>
+      <button class="cmp-button" type="button" data-cart-close>Seguir explorando</button>
+    </div>
+
+    <footer class="cmp-cart-drawer__footer" data-cart-footer {% if cart.item_count == 0 %}hidden{% endif %}>
+      <div class="cmp-cart-drawer__subtotal">
+        <span>Subtotal</span>
+        <strong data-cart-subtotal>{{ cart.total_price | money }}</strong>
+      </div>
+      <p>Envío e impuestos se calculan al finalizar.</p>
+      <form action="{{ routes.cart_url }}" method="post">
+        <button class="cmp-button" type="submit" name="checkout">Finalizar compra</button>
+      </form>
+      <a class="cmp-cart-drawer__cart-link" href="{{ routes.cart_url }}">Ver carrito completo</a>
+    </footer>
+  </section>
+</aside>

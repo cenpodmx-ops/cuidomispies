@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "main": { "type": "main-product", "settings": {} },
+    "routine": { "type": "cmp-kit-routine", "settings": {} }
+  },
+  "order": ["main", "routine"]
+}

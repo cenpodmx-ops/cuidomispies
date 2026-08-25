@@ -1,0 +1,93 @@
+{
+  "sections": {
+    "hero": {
+      "type": "cmp-hero",
+      "settings": {
+        "eyebrow": "Bienestar y cuidado diario",
+        "heading": "Cuida tus pies con claridad y confianza",
+        "text": "<p>Soluciones organizadas por necesidad, rutinas sencillas y orientación para elegir mejor.</p>",
+        "primary_label": "Encuentra tu rutina",
+        "primary_link": "/pages/encuentra-tu-rutina",
+        "secondary_label": "Ver productos",
+        "secondary_link": "/collections/all",
+        "microcopy": "Orientación educativa; no sustituye una valoración profesional."
+      }
+    },
+    "needs": {
+      "type": "cmp-needs",
+      "blocks": {
+        "hongos": { "type": "need", "settings": { "title": "Hongos", "text": "Cuidado antimicótico y preventivo", "icon": "foot", "link": "/collections/hongos" } },
+        "sequedad": { "type": "need", "settings": { "title": "Resequedad", "text": "Humectación y reparación diaria", "icon": "drop", "link": "/collections/talones-piel-seca" } },
+        "juanetes": { "type": "need", "settings": { "title": "Juanetes", "text": "Protección, separación y confort", "icon": "foot", "link": "/collections/juanetes-dedos" } },
+        "sudor": { "type": "need", "settings": { "title": "Sudor y olor", "text": "Frescura y control cotidiano", "icon": "sparkles", "link": "/collections/sudor-mal-olor" } },
+        "diabetes": { "type": "need", "settings": { "title": "Pie diabético", "text": "Cuidado delicado y vigilancia", "icon": "shield", "link": "/collections/cuidado-pie-diabetes" } },
+        "confort": { "type": "need", "settings": { "title": "Confort", "text": "Apoyo para el día a día", "icon": "heart", "link": "/collections/talon-confort" } },
+        "rozaduras": { "type": "need", "settings": { "title": "Rozaduras", "text": "Protección de zonas sensibles", "icon": "shield", "link": "/collections/callos-roce-presion" } },
+        "kits": { "type": "need", "settings": { "title": "Kits", "text": "Rutinas completas en una compra", "icon": "sparkles", "link": "/collections/kits" } }
+      },
+      "block_order": ["hongos", "sequedad", "juanetes", "sudor", "diabetes", "confort", "rozaduras", "kits"],
+      "settings": {
+        "eyebrow": "Compra según lo que necesitas",
+        "heading": "¿Qué quieres cuidar hoy?",
+        "text": "Explora productos y rutinas organizados para que sea más fácil decidir."
+      }
+    },
+    "featured_products": {
+      "type": "cmp-featured-collection",
+      "settings": {
+        "eyebrow": "Selección CuidoMisPies",
+        "heading": "Esenciales de cuidado diario",
+        "text": "Una selección para empezar con pasos sencillos y constantes.",
+        "collection": "esenciales",
+        "products_to_show": 4,
+        "soft_background": true
+      }
+    },
+    "kit": {
+      "type": "cmp-featured-kit",
+      "settings": {
+        "eyebrow": "Una rutina completa",
+        "heading": "Kit de cuidado destacado",
+        "text": "Reúne los pasos esenciales en una sola compra.",
+        "button_label": "Ver todos los kits",
+        "link": "/collections/kits"
+      }
+    },
+    "routine": {
+      "type": "cmp-routine-teaser",
+      "settings": {
+        "eyebrow": "Te orientamos paso a paso",
+        "heading": "¿No sabes qué elegir?",
+        "text": "Responde cinco preguntas sencillas y encuentra una selección acorde con tu necesidad.",
+        "button_label": "Encontrar mi rutina",
+        "link": "/pages/encuentra-tu-rutina"
+      }
+    },
+    "guidance": {
+      "type": "cmp-guidance",
+      "blocks": {
+        "clear": { "type": "item", "settings": { "icon": "heart", "title": "Uso claro", "text": "Cada ficha explica para qué sirve, cómo se usa y qué precauciones considerar.", "link_label": "Explorar productos", "link": "/collections/all" } },
+        "safe": { "type": "item", "settings": { "icon": "professional", "title": "Señales de alerta", "text": "Te indicamos cuándo conviene suspender el uso y buscar atención profesional.", "link_label": "Leer orientación", "link": "/pages/orientacion" } },
+        "delivery": { "type": "item", "settings": { "icon": "truck", "title": "Compra segura", "text": "Carrito, inventario, pagos y seguimiento gestionados de forma nativa por Shopify.", "link_label": "Preguntas frecuentes", "link": "/pages/preguntas-frecuentes" } }
+      },
+      "block_order": ["clear", "safe", "delivery"],
+      "settings": {
+        "eyebrow": "Cuidado informado",
+        "heading": "Acompañamiento más allá del producto",
+        "text": "Información práctica para construir hábitos y reconocer cuándo pedir ayuda."
+      }
+    },
+    "kits_collection": {
+      "type": "cmp-featured-collection",
+      "settings": {
+        "eyebrow": "Rutinas listas para usar",
+        "heading": "Kits por necesidad",
+        "text": "Combina pasos complementarios sin tener que elegir producto por producto.",
+        "collection": "kits",
+        "products_to_show": 4,
+        "soft_background": false
+      }
+    }
+  },
+  "order": ["hero", "needs", "featured_products", "kit", "routine", "guidance", "kits_collection"]
+}

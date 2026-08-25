@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "cmp-routine-finder",
+      "settings": {
+        "heading": "Encuentra un punto de partida para tu rutina",
+        "text": "Cinco preguntas breves para organizar las opciones según lo que necesitas.",
+        "collection_hongos": "hongos",
+        "collection_resequedad": "talones-piel-seca",
+        "collection_juanetes": "juanetes-dedos",
+        "collection_sudor": "sudor-mal-olor",
+        "collection_confort": "talon-confort",
+        "professional_label": "Ver opciones de orientación",
+        "professional_link": "/pages/orientacion"
+      }
+    }
+  },
+  "order": ["main"]
+}

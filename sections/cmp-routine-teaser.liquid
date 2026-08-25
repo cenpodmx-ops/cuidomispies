@@ -1,0 +1,27 @@
+<section class="cmp-routine-teaser section-spacing">
+  <div class="page-width">
+    <div class="cmp-routine-teaser__card">
+      <div class="cmp-routine-teaser__icon">{% render 'icon', name: 'sparkles' %}</div>
+      <div>
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2>{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.text }}</p>
+      </div>
+      <a class="button button--primary" href="{{ section.settings.link | default: '/pages/encuentra-tu-rutina' }}">{{ section.settings.button_label }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Recomendador de rutina",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Te orientamos paso a paso" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "¿No sabes qué elegir?" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Responde cinco preguntas sencillas y encuentra una selección acorde con tu necesidad." },
+    { "type": "text", "id": "button_label", "label": "Botón", "default": "Encontrar mi rutina" },
+    { "type": "url", "id": "link", "label": "Enlace" }
+  ],
+  "presets": [{ "name": "Recomendador de rutina" }]
+}
+{% endschema %}

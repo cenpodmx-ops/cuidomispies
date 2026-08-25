@@ -1,0 +1,134 @@
+{{ 'routine-finder.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'routine-finder.js' | asset_url }}" defer></script>
+
+{% liquid
+  assign collection_hongos = section.settings.collection_hongos
+  assign collection_resequedad = section.settings.collection_resequedad
+  assign collection_juanetes = section.settings.collection_juanetes
+  assign collection_sudor = section.settings.collection_sudor
+  assign collection_confort = section.settings.collection_confort
+%}
+
+<section class="cmp-routine-page section-spacing" data-routine-finder>
+  <div class="page-width">
+    <div class="cmp-routine-page__intro">
+      <p class="eyebrow">Orientación personalizada</p>
+      <h1>{{ section.settings.heading }}</h1>
+      <p>{{ section.settings.text }}</p>
+    </div>
+
+    <div class="cmp-routine-box">
+      <form data-routine-form>
+        <div class="cmp-routine-progress" aria-hidden="true"><span data-routine-progress></span></div>
+        <p class="cmp-routine-count" data-routine-count>1 de 5</p>
+
+        <fieldset class="cmp-routine-step" data-routine-step>
+          <legend>¿Cuál es tu principal necesidad?</legend>
+          <div class="cmp-routine-options">
+            <label class="cmp-routine-option"><input type="radio" name="need" value="hongos"><span>Hongos o cambios en las uñas</span></label>
+            <label class="cmp-routine-option"><input type="radio" name="need" value="resequedad"><span>Resequedad o talones ásperos</span></label>
+            <label class="cmp-routine-option"><input type="radio" name="need" value="juanetes"><span>Juanetes o roce entre dedos</span></label>
+            <label class="cmp-routine-option"><input type="radio" name="need" value="sudor"><span>Sudor u olor</span></label>
+            <label class="cmp-routine-option"><input type="radio" name="need" value="confort"><span>Cansancio o falta de confort</span></label>
+          </div>
+          <p class="cmp-routine-error" data-step-error hidden>Elige una opción para continuar.</p>
+          <div class="cmp-routine-actions"><span></span><button class="button button--primary" type="button" data-routine-next>Siguiente</button></div>
+        </fieldset>
+
+        <fieldset class="cmp-routine-step" data-routine-step hidden>
+          <legend>¿En qué zona lo notas principalmente?</legend>
+          <div class="cmp-routine-options">
+            <label class="cmp-routine-option"><input type="radio" name="area" value="skin"><span>Piel o talón</span></label>
+            <label class="cmp-routine-option"><input type="radio" name="area" value="nails"><span>Uñas</span></label>
+            <label class="cmp-routine-option"><input type="radio" name="area" value="toes"><span>Dedos o entre los dedos</span></label>
+            <label class="cmp-routine-option"><input type="radio" name="area" value="whole"><span>Todo el pie</span></label>
+          </div>
+          <p class="cmp-routine-error" data-step-error hidden>Elige una opción para continuar.</p>
+          <div class="cmp-routine-actions"><button class="button button--secondary" type="button" data-routine-previous>Anterior</button><button class="button button--primary" type="button" data-routine-next>Siguiente</button></div>
+        </fieldset>
+
+        <fieldset class="cmp-routine-step" data-routine-step hidden>
+          <legend>¿Qué tipo de rutina prefieres?</legend>
+          <div class="cmp-routine-options">
+            <label class="cmp-routine-option"><input type="radio" name="routine" value="simple"><span>Un paso esencial</span></label>
+            <label class="cmp-routine-option"><input type="radio" name="routine" value="complete"><span>Una rutina completa</span></label>
+          </div>
+          <p class="cmp-routine-error" data-step-error hidden>Elige una opción para continuar.</p>
+          <div class="cmp-routine-actions"><button class="button button--secondary" type="button" data-routine-previous>Anterior</button><button class="button button--primary" type="button" data-routine-next>Siguiente</button></div>
+        </fieldset>
+
+        <fieldset class="cmp-routine-step" data-routine-step hidden>
+          <legend>¿Tienes diabetes, mala circulación o pérdida de sensibilidad?</legend>
+          <div class="cmp-routine-options">
+            <label class="cmp-routine-option"><input type="radio" name="special_care" value="no"><span>No</span></label>
+            <label class="cmp-routine-option"><input type="radio" name="special_care" value="yes"><span>Sí o no estoy seguro</span></label>
+          </div>
+          <p class="cmp-routine-error" data-step-error hidden>Elige una opción para continuar.</p>
+          <div class="cmp-routine-actions"><button class="button button--secondary" type="button" data-routine-previous>Anterior</button><button class="button button--primary" type="button" data-routine-next>Siguiente</button></div>
+        </fieldset>
+
+        <fieldset class="cmp-routine-step" data-routine-step hidden>
+          <legend>¿Hay herida abierta, secreción, inflamación marcada, cambio de color o dolor intenso?</legend>
+          <div class="cmp-routine-options">
+            <label class="cmp-routine-option"><input type="radio" name="red_flags" value="no"><span>No</span></label>
+            <label class="cmp-routine-option"><input type="radio" name="red_flags" value="yes"><span>Sí o no estoy seguro</span></label>
+          </div>
+          <p class="cmp-routine-error" data-step-error hidden>Elige una opción para ver tu orientación.</p>
+          <div class="cmp-routine-actions"><button class="button button--secondary" type="button" data-routine-previous>Anterior</button><button class="button button--primary" type="submit">Ver mi orientación</button></div>
+        </fieldset>
+      </form>
+
+      <div class="cmp-routine-results" data-routine-results hidden>
+        <div class="cmp-routine-safety" data-routine-result="safety" hidden>
+          {% render 'icon', name: 'professional' %}
+          <h2>Lo más seguro es solicitar una valoración profesional</h2>
+          <p>Por lo que indicas, no sería responsable recomendar una compra automática. Evita aplicar productos nuevos sobre lesiones y consulta a un profesional de salud, especialmente si tienes diabetes, cambios de color, secreción o dolor intenso.</p>
+          {% if section.settings.professional_link != blank %}<a class="button button--primary" href="{{ section.settings.professional_link }}">{{ section.settings.professional_label }}</a>{% endif %}
+        </div>
+
+        {% assign need_keys = 'hongos,resequedad,juanetes,sudor,confort' | split: ',' %}
+        {% for need_key in need_keys %}
+          {% case need_key %}
+            {% when 'hongos' %}{% assign result_collection = collection_hongos %}{% assign result_title = 'Cuidado para hongos' %}
+            {% when 'resequedad' %}{% assign result_collection = collection_resequedad %}{% assign result_title = 'Cuidado para resequedad' %}
+            {% when 'juanetes' %}{% assign result_collection = collection_juanetes %}{% assign result_title = 'Confort para juanetes y roce' %}
+            {% when 'sudor' %}{% assign result_collection = collection_sudor %}{% assign result_title = 'Cuidado para sudor y olor' %}
+            {% when 'confort' %}{% assign result_collection = collection_confort %}{% assign result_title = 'Confort para el día a día' %}
+          {% endcase %}
+          <div data-routine-result="{{ need_key }}" hidden>
+            <div class="cmp-routine-result__heading"><p class="eyebrow">Tu punto de partida</p><h2>{{ result_title }}</h2><p>Esta selección es orientativa. Lee la ficha y precauciones de cada producto antes de usarlo.</p></div>
+            {% if result_collection != blank and result_collection.products_count > 0 %}
+              <div class="cmp-product-grid">
+                {% for card_product in result_collection.products limit: 3 %}{% render 'product-card', card_product: card_product, quick_add: true %}{% endfor %}
+              </div>
+              <a class="button button--secondary" href="{{ result_collection.url }}">Ver toda la selección</a>
+            {% else %}
+              <div class="cmp-editor-note">Asigna la colección “{{ result_title }}” en el editor del tema.</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <p class="cmp-routine-disclaimer">Este cuestionario no realiza diagnósticos ni sustituye una evaluación médica o podológica. Tus respuestas se procesan únicamente en tu navegador y no se guardan.</p>
+    <noscript><p class="cmp-routine-disclaimer">Activa JavaScript para usar el recomendador o <a href="{{ routes.all_products_collection_url }}">explora todos los productos</a>.</p></noscript>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Encuentra tu rutina",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Encuentra un punto de partida para tu rutina" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Cinco preguntas breves para organizar las opciones según lo que necesitas." },
+    { "type": "collection", "id": "collection_hongos", "label": "Colección: hongos" },
+    { "type": "collection", "id": "collection_resequedad", "label": "Colección: resequedad" },
+    { "type": "collection", "id": "collection_juanetes", "label": "Colección: juanetes" },
+    { "type": "collection", "id": "collection_sudor", "label": "Colección: sudor y olor" },
+    { "type": "collection", "id": "collection_confort", "label": "Colección: confort" },
+    { "type": "text", "id": "professional_label", "label": "Botón de orientación profesional", "default": "Ver opciones de orientación" },
+    { "type": "url", "id": "professional_link", "label": "Enlace de orientación profesional" }
+  ],
+  "presets": [{ "name": "Encuentra tu rutina" }]
+}
+{% endschema %}

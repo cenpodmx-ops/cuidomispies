@@ -1,0 +1,101 @@
+{{ 'collection.css' | asset_url | stylesheet_tag }}
+
+<section class="cmp-collection section-spacing">
+  <div class="page-width">
+    {% render 'breadcrumbs' %}
+
+    <header class="cmp-collection__hero">
+      <div>
+        {% if collection.metafields.cmp.eyebrow.value != blank %}<p class="eyebrow">{{ collection.metafields.cmp.eyebrow.value }}</p>{% endif %}
+        <h1>{{ collection.title }}</h1>
+        {% if collection.description != blank %}<div class="rte cmp-collection__description">{{ collection.description }}</div>{% endif %}
+      </div>
+      {% if collection.image %}
+        {{ collection.image | image_url: width: 1200 | image_tag: loading: 'eager', widths: '600, 900, 1200', sizes: '(min-width: 750px) 42vw, 100vw', alt: collection.image.alt | default: collection.title }}
+      {% endif %}
+    </header>
+
+    {% if collection.metafields.cmp.educational_content.value != blank %}
+      <div class="cmp-education rte">{{ collection.metafields.cmp.educational_content | metafield_tag }}</div>
+    {% endif %}
+
+    <form class="cmp-collection-tools" id="CollectionFilters" method="get">
+      {% if collection.filters.size > 0 %}
+        <details class="cmp-filter">
+          <summary>Filtrar{% render 'icon', name: 'chevron' %}</summary>
+          <div class="cmp-filter__panel">
+            {% for filter in collection.filters %}
+              <fieldset>
+                <legend>{{ filter.label }}</legend>
+                {% case filter.type %}
+                  {% when 'boolean', 'list' %}
+                    {% for value in filter.values %}
+                      <label>
+                        <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}"{% if value.active %} checked{% endif %}{% if value.count == 0 and value.active == false %} disabled{% endif %}>
+                        <span>{{ value.label }} ({{ value.count }})</span>
+                      </label>
+                    {% endfor %}
+                  {% when 'price_range' %}
+                    <div class="cmp-filter__price">
+                      <label>Desde <input name="{{ filter.min_value.param_name }}" type="number" min="0" placeholder="0"{% if filter.min_value.value %} value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"{% endif %}></label>
+                      <label>Hasta <input name="{{ filter.max_value.param_name }}" type="number" min="0" placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"{% if filter.max_value.value %} value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"{% endif %}></label>
+                    </div>
+                {% endcase %}
+              </fieldset>
+            {% endfor %}
+            <div class="cmp-filter__actions"><button class="button button--primary" type="submit">Aplicar</button><a href="{{ collection.url }}">Limpiar</a></div>
+          </div>
+        </details>
+      {% endif %}
+
+      <p>{{ collection.products_count }} productos</p>
+      <label class="cmp-sort">Ordenar
+        <select name="sort_by" onchange="this.form.submit()">
+          {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+          {% for option in collection.sort_options %}
+            <option value="{{ option.value }}"{% if option.value == sort_by %} selected{% endif %}>{{ option.name }}</option>
+          {% endfor %}
+        </select>
+      </label>
+    </form>
+
+    {% paginate collection.products by section.settings.products_per_page %}
+      {% if collection.products.size > 0 %}
+        <div class="cmp-product-grid">
+          {% for card_product in collection.products %}
+            {% render 'product-card', card_product: card_product, quick_add: true %}
+          {% endfor %}
+        </div>
+
+        {% if paginate.pages > 1 %}
+          <nav class="pagination" aria-label="Paginación">
+            {% if paginate.previous %}<a href="{{ paginate.previous.url }}">Anterior</a>{% endif %}
+            <span>Página {{ paginate.current_page }} de {{ paginate.pages }}</span>
+            {% if paginate.next %}<a href="{{ paginate.next.url }}">Siguiente</a>{% endif %}
+          </nav>
+        {% endif %}
+      {% else %}
+        <div class="empty-state"><h2>No encontramos productos</h2><p>Prueba quitando algunos filtros o explora otra necesidad.</p><a class="button button--primary" href="{{ routes.all_products_collection_url }}">Ver todos</a></div>
+      {% endif %}
+    {% endpaginate %}
+
+    <aside class="cmp-quiz-banner">
+      <div>{% render 'icon', name: 'sparkles' %}<div><p class="eyebrow">¿No sabes por dónde empezar?</p><h2>Encuentra una rutina según lo que sientes</h2></div></div>
+      <a class="button button--primary" href="{{ pages['encuentra-tu-rutina'].url | default: '/pages/encuentra-tu-rutina' }}">Hacer el recomendador</a>
+    </aside>
+
+    {% if collection.metafields.cmp.when_to_consult.value != blank %}
+      <aside class="cmp-safety-note">{% render 'icon', name: 'professional' %}<div><strong>Cuándo buscar atención profesional</strong>{{ collection.metafields.cmp.when_to_consult | metafield_tag }}</div></aside>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Colección principal",
+  "settings": [
+    { "type": "range", "id": "products_per_page", "label": "Productos por página", "min": 8, "max": 32, "step": 4, "default": 16 }
+  ],
+  "presets": [{ "name": "Colección principal" }]
+}
+{% endschema %}

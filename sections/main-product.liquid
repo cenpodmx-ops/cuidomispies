@@ -1,0 +1,169 @@
+{{ 'product.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign related_kit = product.metafields.cmp.related_kit.value
+  assign cross_sell = product.metafields.cmp.cross_sell.value
+%}
+
+<section class="cmp-product section-spacing" data-product-section>
+  <div class="page-width">
+    {% render 'breadcrumbs' %}
+
+    <div class="cmp-product__grid">
+      <div class="cmp-product-gallery" data-product-gallery>
+        <div class="cmp-product-gallery__stage">
+          {% if product.media.size > 0 %}
+            {% for media in product.media %}
+              <div class="cmp-product-gallery__item" data-gallery-media="{{ media.id }}"{% unless forloop.first %} hidden{% endunless %}>
+                {% case media.media_type %}
+                  {% when 'image' %}
+                    {{ media.preview_image | image_url: width: 1600 | image_tag: loading: 'eager', widths: '640, 900, 1200, 1600', sizes: '(min-width: 990px) 52vw, 100vw', alt: media.alt | default: product.title }}
+                  {% when 'video' %}
+                    {{ media | video_tag: controls: true, image_size: '1200x' }}
+                  {% when 'external_video' %}
+                    {{ media | external_video_tag }}
+                  {% when 'model' %}
+                    {{ media | model_viewer_tag: image_size: '1200x', reveal: 'interaction', toggleable: true }}
+                {% endcase %}
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="cmp-product-gallery__placeholder">
+              {% render 'icon', name: 'foot' %}
+              <p>Agrega las fotografías de este producto desde Shopify.</p>
+            </div>
+          {% endif %}
+        </div>
+
+        {% if product.media.size > 1 %}
+          <div class="cmp-product-gallery__thumbs" aria-label="Galería de producto">
+            {% for media in product.media %}
+              <button class="cmp-product-gallery__thumb" type="button" data-gallery-thumbnail="{{ media.id }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Mostrar imagen {{ forloop.index }}">
+                {{ media.preview_image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 180', sizes: '72px', alt: media.alt | default: product.title }}
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="cmp-product__info">
+        {% if product.metafields.cmp.care_level.value != blank %}
+          <p class="eyebrow">{{ product.metafields.cmp.care_level.value }}</p>
+        {% endif %}
+        <h1>{{ product.title }}</h1>
+        {% if product.metafields.cmp.short_description.value != blank %}
+          <p class="cmp-product__lead">{{ product.metafields.cmp.short_description.value | escape }}</p>
+        {% endif %}
+        {% render 'price', product: product %}
+
+        {% if product.metafields.cmp.benefits.value != blank %}
+          <ul class="cmp-benefit-list">
+            {% for benefit in product.metafields.cmp.benefits.value %}
+              <li>{% render 'icon', name: 'heart' %}<span>{{ benefit }}</span></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <form class="cmp-product-form" method="post" action="{{ routes.cart_add_url }}" enctype="multipart/form-data" data-product-form>
+          {% unless product.has_only_default_variant %}
+            <label for="Variant-{{ section.id }}">Presentación</label>
+            <select id="Variant-{{ section.id }}" name="id" data-variant-select>
+              {% for variant in product.variants %}
+                <option value="{{ variant.id }}" data-price="{{ variant.price | money | escape }}" data-available="{{ variant.available }}"{% if variant == current_variant %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>
+                  {{ variant.title }}{% unless variant.available %} — Agotado{% endunless %}
+                </option>
+              {% endfor %}
+            </select>
+          {% else %}
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+          {% endunless %}
+
+          <div class="cmp-product-form__row">
+            <div class="quantity-selector" data-quantity>
+              <button type="button" data-quantity-change="-1" aria-label="Reducir cantidad">−</button>
+              <input type="number" name="quantity" value="1" min="1" aria-label="Cantidad">
+              <button type="button" data-quantity-change="1" aria-label="Aumentar cantidad">+</button>
+            </div>
+            <button class="button button--primary button--full" type="submit" data-product-submit{% unless current_variant.available %} disabled{% endunless %}>
+              <span data-submit-label>{% if current_variant.available %}Agregar al carrito{% else %}Agotado{% endif %}</span>
+            </button>
+          </div>
+          <p class="form-error" data-product-error hidden></p>
+        </form>
+        <script type="application/json" data-product-variants>{{ product.variants | json }}</script>
+
+        <ul class="cmp-purchase-trust" role="list">
+          <li>{% render 'icon', name: 'truck' %}<span>Envíos a todo México</span></li>
+          <li>{% render 'icon', name: 'shield' %}<span>Pago protegido por Shopify</span></li>
+          <li>{% render 'icon', name: 'professional' %}<span>Orientación clara para elegir mejor</span></li>
+        </ul>
+
+        <div class="cmp-accordion-group">
+          <details open>
+            <summary>Descripción{% render 'icon', name: 'chevron' %}</summary>
+            <div class="rte">{{ product.description }}</div>
+          </details>
+          {% if product.metafields.cmp.how_to_use.value != blank %}
+            <details>
+              <summary>Cómo usar{% render 'icon', name: 'chevron' %}</summary>
+              <div class="rte">{{ product.metafields.cmp.how_to_use | metafield_tag }}</div>
+            </details>
+          {% endif %}
+          {% if product.metafields.cmp.ingredients.value != blank %}
+            <details>
+              <summary>Ingredientes y presentación{% render 'icon', name: 'chevron' %}</summary>
+              <div class="rte">{{ product.metafields.cmp.ingredients | metafield_tag }}</div>
+            </details>
+          {% endif %}
+          {% if product.metafields.cmp.precautions.value != blank %}
+            <details>
+              <summary>Precauciones{% render 'icon', name: 'chevron' %}</summary>
+              <div class="rte">{{ product.metafields.cmp.precautions | metafield_tag }}</div>
+            </details>
+          {% endif %}
+        </div>
+
+        {% if product.metafields.cmp.when_to_consult.value != blank %}
+          <aside class="cmp-safety-note">
+            {% render 'icon', name: 'professional' %}
+            <div><strong>Cuándo buscar atención profesional</strong>{{ product.metafields.cmp.when_to_consult | metafield_tag }}</div>
+          </aside>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if related_kit != blank %}
+      <div class="cmp-related-callout">
+        <div>
+          <p class="eyebrow">Rutina completa</p>
+          <h2>Complementa este cuidado</h2>
+          <p>{{ related_kit.metafields.cmp.short_description.value | default: related_kit.description | strip_html | truncate: 150 }}</p>
+          <a class="button button--primary" href="{{ related_kit.url }}">Ver {{ related_kit.title }}</a>
+        </div>
+        {% if related_kit.featured_image %}
+          {{ related_kit.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 700, 900', sizes: '(min-width: 750px) 42vw, 100vw', alt: related_kit.featured_image.alt | default: related_kit.title }}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if cross_sell != blank %}
+      <div class="cmp-related-products">
+        <div class="section-heading"><p class="eyebrow">También puede ayudarte</p><h2>Complementos para tu rutina</h2></div>
+        <div class="cmp-product-grid">
+          {% for related_product in cross_sell limit: 4 %}
+            {% render 'product-card', card_product: related_product, quick_add: true %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Producto principal",
+  "settings": [],
+  "presets": [{ "name": "Producto principal" }]
+}
+{% endschema %}
