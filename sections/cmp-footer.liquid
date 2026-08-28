@@ -10,6 +10,23 @@
     </div>
   {% endif %}
 
+  {% if settings.whatsapp_url != blank or settings.support_email != blank %}
+    <div class="cmp-container cmp-footer__contact-band">
+      {% if settings.whatsapp_url != blank %}
+        <a class="cmp-footer__contact-link cmp-footer__contact-link--whatsapp" href="{{ settings.whatsapp_url }}" target="_blank" rel="noopener">
+          {% render 'icon', name: 'professional' %}
+          <span><strong>WhatsApp</strong><small>{{ settings.whatsapp_url | remove: 'https://' | remove: 'http://' | truncate: 40 }}</small></span>
+        </a>
+      {% endif %}
+      {% if settings.support_email != blank %}
+        <a class="cmp-footer__contact-link" href="mailto:{{ settings.support_email }}">
+          {% render 'icon', name: 'shield' %}
+          <span><strong>Correo</strong><small>{{ settings.support_email }}</small></span>
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
+
   <div class="cmp-container cmp-footer__main">
     <div class="cmp-footer__brand">
       <a href="{{ routes.root_url }}" aria-label="Inicio">

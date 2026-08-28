@@ -1177,6 +1177,38 @@ summary:focus-visible {
   background: color-mix(in srgb, var(--cmp-teal) 42%, var(--cmp-graphite));
 }
 
+/* Banda de contacto (WhatsApp + email) — aparece en el footer */
+.cmp-footer__contact-band {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  justify-content: center;
+  padding-block: 1rem 1.2rem;
+  border-bottom: 1px solid var(--cmp-border);
+  background: var(--cmp-ivory);
+}
+.cmp-footer__contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--cmp-graphite);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--cmp-radius-sm);
+  transition: background 180ms ease, color 180ms ease;
+}
+.cmp-footer__contact-link:hover {
+  background: color-mix(in srgb, var(--cmp-teal) 8%, var(--cmp-ivory));
+  color: var(--cmp-teal);
+  text-decoration: none;
+}
+.cmp-footer__contact-link--whatsapp:hover {
+  background: color-mix(in srgb, var(--cmp-sage) 22%, var(--cmp-ivory));
+}
+.cmp-footer__contact-link strong { font-size: 0.85rem; display: block; }
+.cmp-footer__contact-link small { font-size: 0.72rem; color: var(--cmp-muted); display: block; }
+.cmp-footer__contact-link svg { width: 1.4rem; height: 1.4rem; color: var(--cmp-teal); }
+
 .cmp-footer__trust-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
