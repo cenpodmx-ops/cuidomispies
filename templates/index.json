@@ -16,14 +16,14 @@
     "needs": {
       "type": "cmp-needs",
       "blocks": {
-        "hongos": { "type": "need", "settings": { "title": "Hongos", "text": "Cuidado antimicótico y preventivo", "icon": "foot", "link": "/collections/hongos" } },
-        "sequedad": { "type": "need", "settings": { "title": "Talones y piel seca", "text": "Resequedad, piel engrosada y talones", "icon": "drop", "link": "/collections/talones-y-piel-seca" } },
-        "juanetes": { "type": "need", "settings": { "title": "Juanetes y dedos", "text": "Roce, separación y protección", "icon": "foot", "link": "/collections/juanetes-y-dedos" } },
-        "sudor": { "type": "need", "settings": { "title": "Sudor y mal olor", "text": "Pies y calzado", "icon": "sparkles", "link": "/collections/sudor-y-mal-olor" } },
-        "diabetes": { "type": "need", "settings": { "title": "Cuidado del pie en diabetes", "text": "Protección, hidratación y rutina diaria", "icon": "shield", "link": "/collections/cuidado-del-pie-en-diabetes" } },
-        "confort": { "type": "need", "settings": { "title": "Talón y confort", "text": "Amortiguación y comodidad", "icon": "heart", "link": "/collections/talon-y-confort" } },
-        "rozaduras": { "type": "need", "settings": { "title": "Callos, roce y presión", "text": "Protección localizada", "icon": "shield", "link": "/collections/callos-roce-y-presion" } },
-        "kits": { "type": "need", "settings": { "title": "Kits", "text": "Rutinas completas en una compra", "icon": "sparkles", "link": "/collections/kits-por-necesidad" } }
+        "hongos": { "type": "need", "settings": { "title": "Hongos", "text": "Uñas, piel y calzado", "icon": "foot", "asset_image": "cmp-category-hongos.jpg", "link": "/collections/hongos" } },
+        "sequedad": { "type": "need", "settings": { "title": "Talones y piel seca", "text": "Resequedad, piel engrosada y talones", "icon": "drop", "asset_image": "cmp-category-talones.jpg", "link": "/collections/talones-y-piel-seca" } },
+        "juanetes": { "type": "need", "settings": { "title": "Juanetes y dedos", "text": "Roce, separación y protección", "icon": "foot", "asset_image": "cmp-category-juanetes.jpg", "link": "/collections/juanetes-y-dedos" } },
+        "sudor": { "type": "need", "settings": { "title": "Sudor y mal olor", "text": "Pies y calzado", "icon": "sparkles", "asset_image": "cmp-category-sudor.jpg", "link": "/collections/sudor-y-mal-olor" } },
+        "diabetes": { "type": "need", "settings": { "title": "Cuidado del pie en diabetes", "text": "Protección, hidratación y rutina diaria", "icon": "shield", "asset_image": "cmp-category-diabetes.jpg", "link": "/collections/cuidado-del-pie-en-diabetes" } },
+        "confort": { "type": "need", "settings": { "title": "Talón y confort", "text": "Amortiguación y comodidad", "icon": "heart", "asset_image": "cmp-category-confort.jpg", "link": "/collections/talon-y-confort" } },
+        "rozaduras": { "type": "need", "settings": { "title": "Callos, roce y presión", "text": "Protección localizada", "icon": "shield", "asset_image": "cmp-category-callos.jpg", "link": "/collections/callos-roce-y-presion" } },
+        "kits": { "type": "need", "settings": { "title": "Kits", "text": "Rutinas completas en una compra", "icon": "sparkles", "asset_image": "cmp-category-kits.jpg", "link": "/collections/kits-por-necesidad" } }
       },
       "block_order": ["hongos", "sequedad", "juanetes", "sudor", "diabetes", "confort", "rozaduras", "kits"],
       "settings": {
