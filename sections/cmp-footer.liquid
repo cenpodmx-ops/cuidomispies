@@ -30,7 +30,11 @@
   <div class="cmp-container cmp-footer__main">
     <div class="cmp-footer__brand">
       <a href="{{ routes.root_url }}" aria-label="Inicio">
-        <img src="{{ 'cmp-logo.svg' | asset_url }}" width="220" height="54" alt="CuidoMisPies">
+        {% if settings.logo != blank %}
+          {{ settings.logo | image_url: width: 520 | image_tag: widths: '220, 360, 520', sizes: '220px', width: settings.logo.width, height: settings.logo.height, alt: shop.name }}
+        {% else %}
+          <img src="{{ 'cmp-logo.svg' | asset_url }}" width="220" height="54" alt="CuidoMisPies">
+        {% endif %}
       </a>
       <p>{{ section.settings.brand_text }}</p>
       <div class="cmp-footer__social">
@@ -46,10 +50,10 @@
           {% for link in section.settings.menu_1.links %}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}
         {% else %}
           <li><a href="{{ routes.collections_url }}/hongos">Hongos</a></li>
-          <li><a href="{{ routes.collections_url }}/cuidado-pie-diabetes">Diabetes</a></li>
-          <li><a href="{{ routes.collections_url }}/talones-piel-seca">Piel seca y talones</a></li>
-          <li><a href="{{ routes.collections_url }}/sudor-mal-olor">Sudor y olor</a></li>
-          <li><a href="{{ routes.collections_url }}/juanetes-dedos">Juanetes y dedos</a></li>
+          <li><a href="{{ routes.collections_url }}/cuidado-del-pie-en-diabetes">Diabetes</a></li>
+          <li><a href="{{ routes.collections_url }}/talones-y-piel-seca">Piel seca y talones</a></li>
+          <li><a href="{{ routes.collections_url }}/sudor-y-mal-olor">Sudor y olor</a></li>
+          <li><a href="{{ routes.collections_url }}/juanetes-y-dedos">Juanetes y dedos</a></li>
         {% endif %}
       </ul>
     </div>

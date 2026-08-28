@@ -847,6 +847,12 @@ summary:focus-visible {
 
 .cmp-mobile-menu__header img {
   width: 165px;
+  height: auto;
+}
+
+.cmp-mobile-menu__logo {
+  display: block;
+  line-height: 0;
 }
 
 .cmp-mobile-menu__label {
@@ -1247,9 +1253,17 @@ summary:focus-visible {
   padding-block: 3.5rem 2.5rem;
 }
 
+.cmp-footer__brand > a {
+  display: inline-block;
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  background: #fff;
+  line-height: 0;
+}
+
 .cmp-footer__brand img {
-  width: 200px;
-  filter: brightness(0) invert(1);
+  width: 220px;
+  height: auto;
 }
 
 .cmp-footer__brand p,
@@ -1379,6 +1393,10 @@ summary:focus-visible {
 }
 
 @media (max-width: 749px) {
+  .cmp-header {
+    backdrop-filter: none;
+  }
+
   .cmp-announcement__inner {
     justify-content: center;
   }
@@ -1389,6 +1407,31 @@ summary:focus-visible {
 
   .cmp-header__inner {
     min-height: 62px;
+    gap: 0.35rem;
+    padding-inline: 0.75rem;
+  }
+
+  .cmp-header__logo {
+    width: min(43vw, 160px);
+  }
+
+  .cmp-header__actions {
+    gap: 0;
+  }
+
+  .cmp-mobile-menu__panel {
+    width: min(92%, 370px);
+  }
+
+  .cmp-mobile-menu__header {
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    background: var(--cmp-ivory);
+  }
+
+  .cmp-mobile-menu__needs > a {
+    min-height: 58px;
   }
 
   .cmp-header__search {
@@ -1415,13 +1458,17 @@ summary:focus-visible {
   }
 
   .cmp-footer__main {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 2.2rem 1.25rem;
   }
 
   .cmp-footer__brand,
   .cmp-footer__newsletter {
-    grid-column: 1 / -1;
+    grid-column: auto;
+  }
+
+  .cmp-footer__brand img {
+    width: min(68vw, 220px);
   }
 
   .cmp-footer__form {

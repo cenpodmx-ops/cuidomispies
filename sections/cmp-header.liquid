@@ -35,7 +35,7 @@
           <a href="{{ link.url }}">{{ link.title }}</a>
         {% endfor %}
       {% else %}
-        <a href="{{ routes.collections_url }}/kits">Kits y rutinas</a>
+        <a href="{{ routes.collections_url }}/kits-por-necesidad">Kits y rutinas</a>
         <a href="{{ routes.all_products_collection_url }}">Productos</a>
         <a href="/pages/encuentra-tu-rutina">Encuentra tu rutina</a>
         <a href="/pages/orientacion">Orientación</a>
@@ -67,7 +67,13 @@
     <button class="cmp-mobile-menu__overlay" type="button" data-mobile-menu-overlay aria-label="Cerrar menú"></button>
     <nav class="cmp-mobile-menu__panel" aria-label="Navegación móvil">
       <div class="cmp-mobile-menu__header">
-        <img src="{{ 'cmp-logo.svg' | asset_url }}" width="180" height="44" alt="CuidoMisPies">
+        <a class="cmp-mobile-menu__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} - Inicio">
+          {% if settings.logo != blank %}
+            {{ settings.logo | image_url: width: 440 | image_tag: widths: '180, 260, 360, 440', sizes: '170px', width: settings.logo.width, height: settings.logo.height, alt: shop.name }}
+          {% else %}
+            <img src="{{ 'cmp-logo.svg' | asset_url }}" width="180" height="44" alt="CuidoMisPies">
+          {% endif %}
+        </a>
         <button class="cmp-icon-button" type="button" data-mobile-menu-close aria-label="Cerrar menú">{% render 'icon', name: 'close' %}</button>
       </div>
       <p class="cmp-mobile-menu__label">¿Qué quieres cuidar?</p>
@@ -84,7 +90,7 @@
         {% if section.settings.menu != blank %}
           {% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}
         {% else %}
-          <a href="{{ routes.collections_url }}/kits">Kits y rutinas</a>
+          <a href="{{ routes.collections_url }}/kits-por-necesidad">Kits y rutinas</a>
           <a href="{{ routes.all_products_collection_url }}">Todos los productos</a>
           <a href="/pages/encuentra-tu-rutina">Encuentra tu rutina</a>
           <a href="/pages/orientacion">Orientación</a>
