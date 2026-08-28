@@ -13,10 +13,39 @@
   const drawerEnabled = drawer.dataset.drawerEnabled === 'true';
   const liveRegion = document.querySelector('[data-live-region]');
   let lastFocusedElement = null;
+  let trapHandler = null;
+
+  // Focus trap: mantén el foco dentro del drawer mientras esté abierto
+  const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+  const trapFocus = () => {
+    trapHandler = (event) => {
+      if (event.key !== 'Tab') return;
+      const focusable = drawer.querySelectorAll(focusableSelector);
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    drawer.addEventListener('keydown', trapHandler);
+  };
+
+  const releaseFocus = () => {
+    if (trapHandler) {
+      drawer.removeEventListener('keydown', trapHandler);
+      trapHandler = null;
+    }
+  };
 
   const money = (cents, currency = window.CMP?.currency || 'MXN') => new Intl.NumberFormat(
     document.documentElement.lang || 'es-MX',
-    { style: 'currency', currency, maximumFractionDigits: 0 }
+    { style: 'currency', currency, minimumFractionDigits: 0, maximumFractionDigits: 2 }
   ).format(cents / 100);
 
   const escapeHTML = (value = '') => String(value)
@@ -42,12 +71,16 @@
   const open = () => {
     lastFocusedElement = document.activeElement;
     drawer.hidden = false;
-    requestAnimationFrame(() => drawer.classList.add('is-open'));
+    requestAnimationFrame(() => {
+      drawer.classList.add('is-open');
+      drawer.querySelector('[data-cart-close]')?.focus();
+      trapFocus();
+    });
     document.body.classList.add('cmp-drawer-open');
-    drawer.querySelector('[data-cart-close]')?.focus();
   };
 
   const close = () => {
+    releaseFocus();
     drawer.classList.remove('is-open');
     document.body.classList.remove('cmp-drawer-open');
     window.setTimeout(() => { drawer.hidden = true; }, 180);

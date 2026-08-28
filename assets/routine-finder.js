@@ -53,7 +53,14 @@ class RoutineFinder {
     this.root.querySelectorAll('[data-routine-result]').forEach((panel) => {
       panel.hidden = panel.dataset.routineResult !== target;
     });
-    this.result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Mover foco al resultado y scroll respetando prefers-reduced-motion
+    const heading = this.result.querySelector('h2, [data-routine-title]');
+    if (heading) {
+      heading.setAttribute('tabindex', '-1');
+      heading.focus({ preventScroll: true });
+    }
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.result.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
   }
 }
 

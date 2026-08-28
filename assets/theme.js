@@ -1,12 +1,41 @@
 (() => {
   const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  let mobileMenuTrapHandler = null;
+  let mobileMenuLastFocused = null;
+
+  const trapFocusInMenu = (menu) => {
+    mobileMenuTrapHandler = (event) => {
+      if (event.key !== 'Tab') return;
+      const focusable = menu.querySelectorAll(focusableSelector);
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    menu.addEventListener('keydown', mobileMenuTrapHandler);
+  };
+
+  const releaseMenuFocus = (menu) => {
+    if (mobileMenuTrapHandler) {
+      menu.removeEventListener('keydown', mobileMenuTrapHandler);
+      mobileMenuTrapHandler = null;
+    }
+  };
 
   const closeMobileMenu = () => {
     const menu = document.querySelector('[data-mobile-menu]');
     if (!menu) return;
+    releaseMenuFocus(menu);
     menu.hidden = true;
     document.body.classList.remove('cmp-menu-open');
     document.querySelector('[data-mobile-menu-open]')?.setAttribute('aria-expanded', 'false');
+    mobileMenuLastFocused?.focus();
   };
 
   document.addEventListener('click', (event) => {
@@ -14,10 +43,13 @@
     if (opener) {
       const menu = document.querySelector('[data-mobile-menu]');
       if (!menu) return;
+      mobileMenuLastFocused = document.activeElement;
       menu.hidden = false;
       document.body.classList.add('cmp-menu-open');
       opener.setAttribute('aria-expanded', 'true');
-      menu.querySelector(focusableSelector)?.focus();
+      const firstFocusable = menu.querySelector(focusableSelector);
+      firstFocusable?.focus();
+      trapFocusInMenu(menu);
       return;
     }
 
