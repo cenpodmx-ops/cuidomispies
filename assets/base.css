@@ -3,6 +3,134 @@
   margin-inline: auto;
 }
 
+/* === Clases utilitarias usadas por las secciones cmp-* ===
+   Estas clases son el contrato común de layout que usan todas las secciones.
+   Sin ellas, las secciones pierden padding vertical, max-width y antetítulos. === */
+
+/* Max-width de página (alias de .cmp-container para usar en secciones) */
+.page-width {
+  width: min(calc(100% - (var(--cmp-page-margin) * 2)), var(--cmp-page-width));
+  margin-inline: auto;
+}
+
+/* Espaciado vertical estándar de sección (responsive, usa clamp para fluido) */
+.section-spacing {
+  padding-block: clamp(3.5rem, 7vw, 6.5rem);
+}
+.section-spacing--tight {
+  padding-block: clamp(2rem, 4vw, 3.5rem);
+}
+.section-spacing--loose {
+  padding-block: clamp(5rem, 10vw, 9rem);
+}
+
+/* Antetítulo (eyebrow) — texto pequeño en mayúsculas con color de marca */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--cmp-teal);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+/* === Botones ===
+   .button es el alias principal; .cmp-button es el de marca.
+   Ambos existen para soportar secciones que usan cualquiera de las dos convenciones. */
+.button,
+.cmp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  min-height: 2.75rem;
+  border: 1px solid transparent;
+  border-radius: var(--cmp-radius-sm);
+  background: var(--cmp-teal);
+  color: var(--cmp-ivory);
+  font-family: var(--cmp-font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 80ms ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.button:hover,
+.cmp-button:hover {
+  background: var(--cmp-teal-dark);
+  text-decoration: none;
+}
+.button:active,
+.cmp-button:active { transform: translateY(1px); }
+.button:focus-visible,
+.cmp-button:focus-visible {
+  outline: 2px solid var(--cmp-teal);
+  outline-offset: 3px;
+}
+.button:disabled,
+.cmp-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Variante primaria (alias explícito) */
+.button--primary { /* idéntico a .button; existe para markup explícito */ }
+
+/* Variante secundaria — borde teal, fondo transparente */
+.button--secondary,
+.cmp-button--secondary {
+  background: transparent;
+  color: var(--cmp-teal);
+  border-color: var(--cmp-teal);
+}
+.button--secondary:hover,
+.cmp-button--secondary:hover {
+  background: color-mix(in srgb, var(--cmp-teal) 8%, transparent);
+  color: var(--cmp-teal-dark);
+}
+
+/* Variante terciaria (ghost) — solo texto */
+.button--tertiary,
+.cmp-button--tertiary {
+  background: transparent;
+  color: var(--cmp-teal);
+  border-color: transparent;
+  padding-inline: 0.5rem;
+}
+.button--tertiary:hover,
+.cmp-button--tertiary:hover {
+  background: color-mix(in srgb, var(--cmp-teal) 6%, transparent);
+  text-decoration: none;
+}
+
+/* Botón a ancho completo */
+.button--full,
+.cmp-button--full {
+  width: 100%;
+}
+
+/* Enlace con flecha (text-link) */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--cmp-teal);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: gap 180ms ease, color 180ms ease;
+}
+.text-link:hover { gap: 0.6rem; color: var(--cmp-teal-dark); text-decoration: none; }
+
 /* Product cards */
 .cmp-product-grid {
   display: grid;

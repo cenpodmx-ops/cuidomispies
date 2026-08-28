@@ -26,5 +26,31 @@
     --cmp-shadow-sm: 0 2px 12px rgb(36 48 47 / 8%);
     --cmp-shadow: 0 18px 50px rgb(36 48 47 / 12%);
     --cmp-transition: 180ms ease;
+
+    /* === Aliases — variables usadas por los CSS de página (home/product/collection/cart/routine-finder)
+       Mapean las variables --color-*, --radius-*, --shadow-* a los --cmp-* de marca.
+       Sin ellos, el diseño visual de las páginas colapsa (sin bordes, sombras, colores). === */
+    --color-primary: var(--cmp-teal);
+    --color-primary-dark: var(--cmp-teal-dark);
+    --color-secondary: var(--cmp-sage);
+    --color-secondary-contrast: var(--cmp-graphite);
+    --color-accent: var(--cmp-beige);
+    --color-background: var(--cmp-ivory);
+    --color-background-soft: color-mix(in srgb, var(--cmp-beige) 38%, var(--cmp-ivory));
+    --color-surface: #ffffff;
+    --color-surface-alt: color-mix(in srgb, var(--cmp-sage) 14%, var(--cmp-ivory));
+    --color-text: var(--cmp-graphite);
+    --color-text-muted: var(--cmp-muted);
+    --color-border: var(--cmp-border);
+    --color-success: var(--cmp-success);
+    --color-warning: var(--cmp-warning);
+    --color-danger: var(--cmp-danger);
+    --font-heading-family: var(--cmp-font-heading);
+    --font-body-family: var(--cmp-font-body);
+    --radius-card: var(--cmp-radius);
+    --radius-small: var(--cmp-radius-sm);
+    --radius-button: var(--cmp-radius-sm);
+    --shadow-soft: var(--cmp-shadow-sm);
+    --shadow-card: var(--cmp-shadow);
   }
 {% endstyle %}
