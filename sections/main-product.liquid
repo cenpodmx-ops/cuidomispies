@@ -18,7 +18,7 @@
               <div class="cmp-product-gallery__item" data-gallery-media="{{ media.id }}"{% unless forloop.first %} hidden{% endunless %}>
                 {% case media.media_type %}
                   {% when 'image' %}
-                    {{ media.preview_image | image_url: width: 1600 | image_tag: loading: 'eager', widths: '640, 900, 1200, 1600', sizes: '(min-width: 990px) 52vw, 100vw', alt: media.alt | default: product.title }}
+                    {{ media.preview_image | image_url: width: 1600 | image_tag: loading: 'eager', widths: '640, 900, 1200, 1600', sizes: '(min-width: 990px) 52vw, 100vw', alt: media.alt | default: product.title, data-product-main-image: forloop.first }}
                   {% when 'video' %}
                     {{ media | video_tag: controls: true, image_size: '1200x' }}
                   {% when 'external_video' %}
@@ -91,7 +91,22 @@
           </div>
           <p class="form-error" data-product-error hidden></p>
         </form>
-        <script type="application/json" data-product-variants>{{ product.variants | json }}</script>
+        <script type="application/json" data-product-variants>
+          {%- capture variants_json -%}
+            [
+              {%- for variant in product.variants -%}
+                {
+                  "id": {{ variant.id }},
+                  "available": {{ variant.available }},
+                  "price": {{ variant.price }},
+                  "compare_at_price": {{ variant.compare_at_price | default: 'null' }}{%- if variant.image -%},
+                  "featured_image": {{ variant.image | json }}{%- endif -%}
+                }{%- unless forloop.last -%},{%- endunless -%}
+              {%- endfor -%}
+            ]
+          {%- endcapture -%}
+          {{ variants_json | strip_newlines }}
+        </script>
 
         <ul class="cmp-purchase-trust" role="list">
           <li>{% render 'icon', name: 'truck' %}<span>Envíos a todo México</span></li>

@@ -76,7 +76,8 @@
       const formatter = new Intl.NumberFormat(document.documentElement.lang || 'es-MX', {
         style: 'currency',
         currency: window.CMP?.currency || 'MXN',
-        maximumFractionDigits: 0
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
       });
       if (price) price.textContent = formatter.format(variant.price / 100);
       if (compare) {
@@ -86,7 +87,15 @@
       if (submit) {
         submit.disabled = !variant.available;
         const label = submit.querySelector('[data-submit-label]');
-        if (label) label.textContent = variant.available ? 'Añadir al carrito' : 'Agotado';
+        if (label) label.textContent = variant.available ? 'Agregar al carrito' : 'Agotado';
+      }
+      // Variant image switching — actualiza la imagen principal si el variant tiene imagen
+      if (variant.featured_image && variant.featured_image.src) {
+        const mainImage = section.querySelector('[data-product-main-image]');
+        if (mainImage && mainImage.src !== variant.featured_image.src) {
+          mainImage.src = variant.featured_image.src;
+          if (variant.featured_image.alt) mainImage.alt = variant.featured_image.alt;
+        }
       }
       if (history.replaceState) {
         const url = new URL(window.location.href);
