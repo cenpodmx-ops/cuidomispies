@@ -1,3 +1,12 @@
+{%- liquid
+  assign breadcrumb_list = '' | split: ''
+  if collection
+    assign breadcrumb_list = breadcrumb_list | push: collection
+  endif
+  if product
+    assign breadcrumb_list = breadcrumb_list | push: product
+  endif
+-%}
 <nav class="cmp-breadcrumbs" aria-label="Migas de pan">
   <a href="{{ routes.root_url }}">Inicio</a>
   <span aria-hidden="true">/</span>
@@ -15,3 +24,20 @@
     <span aria-current="page">{{ page.title }}</span>
   {% endif %}
 </nav>
+
+{%- comment -%} BreadcrumbList structured data para SEO {%- endcomment -%}
+{%- if breadcrumb_list.size > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "{{ shop.url }}" }
+    {%- for crumb in breadcrumb_list -%}
+      {%- assign position = forloop.index | plus: 1 -%},
+      { "@type": "ListItem", "position": {{ position }}, "name": {{ crumb.title | json }}, "item": "{{ shop.url }}{{ crumb.url }}" }
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
