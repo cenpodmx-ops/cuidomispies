@@ -1,0 +1,130 @@
+{% comment %}
+  Sección FAQ — Preguntas frecuentes
+  Usa el metaobject `faq` si está disponible, o blocks manuales como fallback.
+  El merchant puede gestionar las FAQs desde Content → Metaobjects en el admin.
+{% endcomment %}
+
+<section class="cmp-faq section-spacing" data-cmp-faq>
+  <div class="page-width page-width--narrow">
+    {% if section.settings.heading != blank %}
+      <div class="section-heading section-heading--center">
+        {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {% endif %}
+
+    {% assign has_metaobject_faqs = false %}
+    {% if section.settings.faq_metaobject != blank %}
+      {% assign faq_entries = shop.metaobjects[section.settings.faq_metaobject].values %}
+      {% if faq_entries.size > 0 %}
+        {% assign has_metaobject_faqs = true %}
+        <div class="cmp-faq__list" itemscope itemtype="https://schema.org/FAQPage">
+          {% for faq in faq_entries %}
+            <details class="cmp-faq__item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+              <summary class="cmp-faq__question" itemprop="name">
+                {{ faq.question.value | default: faq.question }}
+                <span class="cmp-faq__icon" aria-hidden="true">+</span>
+              </summary>
+              <div class="cmp-faq__answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                <div itemprop="text">{{ faq.answer.value | default: faq.answer }}</div>
+              </div>
+            </details>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endif %}
+
+    {% unless has_metaobject_faqs %}
+      {% if section.blocks.size > 0 %}
+        <div class="cmp-faq__list" itemscope itemtype="https://schema.org/FAQPage">
+          {% for block in section.blocks %}
+            <details class="cmp-faq__item" {{ block.shopify_attributes }} itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+              <summary class="cmp-faq__question" itemprop="name">
+                {{ block.settings.question }}
+                <span class="cmp-faq__icon" aria-hidden="true">+</span>
+              </summary>
+              <div class="cmp-faq__answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                <div itemprop="text">{{ block.settings.answer }}</div>
+              </div>
+            </details>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="cmp-editor-note">
+          Añade preguntas como blocks en el editor del tema, o crea un metaobject <code>faq</code> con campos <strong>question</strong> y <strong>answer</strong> en Content → Metaobjects.
+        </div>
+      {% endif %}
+    {% endunless %}
+
+    {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+      <div class="cmp-faq__cta">
+        <a class="button button--secondary" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .cmp-faq__list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2.5rem; }
+  .cmp-faq__item {
+    border: 1px solid var(--cmp-border);
+    border-radius: var(--cmp-radius-sm);
+    background: var(--cmp-white, #fff);
+    overflow: hidden;
+    transition: border-color 180ms ease;
+  }
+  .cmp-faq__item[open] { border-color: var(--cmp-teal); }
+  .cmp-faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.4rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--cmp-graphite);
+    list-style: none;
+  }
+  .cmp-faq__question::-webkit-details-marker { display: none; }
+  .cmp-faq__icon {
+    flex-shrink: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--cmp-teal);
+    transition: transform 180ms ease;
+    line-height: 1;
+  }
+  .cmp-faq__item[open] .cmp-faq__icon { transform: rotate(45deg); }
+  .cmp-faq__answer {
+    padding: 0 1.4rem 1.2rem;
+    color: var(--cmp-muted);
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+  .cmp-faq__cta { margin-top: 2.5rem; text-align: center; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Preguntas frecuentes",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Ayuda" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Preguntas frecuentes" },
+    { "type": "text", "id": "faq_metaobject", "label": "Tipo de metaobject FAQ", "info": "Escribe el nombre del tipo de metaobject (ej. 'faq') si creaste FAQs en Content → Metaobjects. Si lo dejas vacío, se usan los blocks de abajo." },
+    { "type": "text", "id": "cta_label", "label": "Texto del botón CTA", "default": "¿No encuentras tu respuesta? Escríbenos" },
+    { "type": "url", "id": "cta_link", "label": "Enlace del CTA" }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Pregunta",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pregunta" },
+        { "type": "richtext", "id": "answer", "label": "Respuesta" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Preguntas frecuentes" }]
+}
+{% endschema %}

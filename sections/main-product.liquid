@@ -88,9 +88,36 @@
             <button class="button button--primary button--full" type="submit" data-product-submit{% unless current_variant.available %} disabled{% endunless %}>
               <span data-submit-label>{% if current_variant.available %}Agregar al carrito{% else %}Agotado{% endif %}</span>
             </button>
+            {{ form | payment_button }}
           </div>
           <p class="form-error" data-product-error hidden></p>
         </form>
+
+        {%- if product.selected_or_first_available_variant.available -%}
+          {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+          {%- if pick_up_availabilities.size > 0 -%}
+            <div class="cmp-pickup" data-pickup-availability>
+              <p class="cmp-pickup__title">
+                {% render 'icon', name: 'truck' %}
+                <span>Disponibilidad para recoger</span>
+              </p>
+              <ul class="cmp-pickup__list">
+                {%- for availability in pick_up_availabilities -%}
+                  <li class="cmp-pickup__item">
+                    <span class="cmp-pickup__status cmp-pickup__status--{% if availability.available %}available{% else %}unavailable{% endif %}"></span>
+                    <div>
+                      <strong>{{ availability.location.name }}</strong>
+                      <small>{{ availability.pick_up_time }}</small>
+                      {%- unless availability.available -%}
+                        <small class="cmp-pickup__unavailable">No disponible para recoger</small>
+                      {%- endunless -%}
+                    </div>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
         <script type="application/json" data-product-variants>
           {%- capture variants_json -%}
             [

@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "main": {
+      "type": "page"
+    },
+    "guidance": {
+      "type": "cmp-guidance",
+      "blocks": {
+        "guidance-1": {
+          "type": "card",
+          "settings": {
+            "title": "Ayuda para elegir producto",
+            "text": "¿No sabes cuál producto te conviene? Cuéntanos qué necesitas cuidar y te recomendamos la mejor opción o kit.",
+            "link_label": "WhatsApp",
+            "icon": "professional"
+          }
+        },
+        "guidance-2": {
+          "type": "card",
+          "settings": {
+            "title": "Consulta profesional",
+            "text": "Si presentas una condición particular, lesión o necesitas valoración, conectamos con orientación profesional especializada en cuidado del pie.",
+            "link_label": "Solicitar consulta",
+            "icon": "shield"
+          }
+        },
+        "guidance-3": {
+          "type": "card",
+          "settings": {
+            "title": "Quiz: Encuentra tu rutina",
+            "text": "Si prefieres empezar por tu cuenta, usa nuestro quiz de 5 preguntas para encontrar una rutina de cuidado.",
+            "link_label": "Empezar quiz",
+            "icon": "sparkles"
+          }
+        }
+      },
+      "block_order": ["guidance-1", "guidance-2", "guidance-3"],
+      "settings": {
+        "heading": "Te ayudamos a elegir"
+      }
+    },
+    "faq": {
+      "type": "cmp-faq",
+      "settings": {
+        "eyebrow": "Dudas comunes",
+        "heading": "Preguntas frecuentes sobre orientación",
+        "faq_metaobject": "faq"
+      }
+    }
+  },
+  "order": ["main", "guidance", "faq"]
+}

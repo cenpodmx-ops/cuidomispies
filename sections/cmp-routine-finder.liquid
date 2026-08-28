@@ -7,6 +7,9 @@
   assign collection_juanetes = section.settings.collection_juanetes
   assign collection_sudor = section.settings.collection_sudor
   assign collection_confort = section.settings.collection_confort
+  assign collection_diabetes = section.settings.collection_diabetes
+  assign collection_callos = section.settings.collection_callos
+  assign collection_cuidado_diario = section.settings.collection_cuidado_diario
 %}
 
 <section class="cmp-routine-page section-spacing" data-routine-finder>
@@ -30,6 +33,9 @@
             <label class="cmp-routine-option"><input type="radio" name="need" value="juanetes"><span>Juanetes o roce entre dedos</span></label>
             <label class="cmp-routine-option"><input type="radio" name="need" value="sudor"><span>Sudor u olor</span></label>
             <label class="cmp-routine-option"><input type="radio" name="need" value="confort"><span>Cansancio o falta de confort</span></label>
+            <label class="cmp-routine-option"><input type="radio" name="need" value="diabetes"><span>Cuidado preventivo por diabetes</span></label>
+            <label class="cmp-routine-option"><input type="radio" name="need" value="callos"><span>Callos o presión localizada</span></label>
+            <label class="cmp-routine-option"><input type="radio" name="need" value="cuidado_diario"><span>Cuidado diario general</span></label>
           </div>
           <p class="cmp-routine-error" data-step-error hidden>Elige una opción para continuar.</p>
           <div class="cmp-routine-actions"><span></span><button class="button button--primary" type="button" data-routine-next>Siguiente</button></div>
@@ -86,7 +92,7 @@
           {% if section.settings.professional_link != blank %}<a class="button button--primary" href="{{ section.settings.professional_link }}">{{ section.settings.professional_label }}</a>{% endif %}
         </div>
 
-        {% assign need_keys = 'hongos,resequedad,juanetes,sudor,confort' | split: ',' %}
+        {% assign need_keys = 'hongos,resequedad,juanetes,sudor,confort,diabetes,callos,cuidado_diario' | split: ',' %}
         {% for need_key in need_keys %}
           {% case need_key %}
             {% when 'hongos' %}{% assign result_collection = collection_hongos %}{% assign result_title = 'Cuidado para hongos' %}
@@ -94,6 +100,9 @@
             {% when 'juanetes' %}{% assign result_collection = collection_juanetes %}{% assign result_title = 'Confort para juanetes y roce' %}
             {% when 'sudor' %}{% assign result_collection = collection_sudor %}{% assign result_title = 'Cuidado para sudor y olor' %}
             {% when 'confort' %}{% assign result_collection = collection_confort %}{% assign result_title = 'Confort para el día a día' %}
+            {% when 'diabetes' %}{% assign result_collection = collection_diabetes %}{% assign result_title = 'Cuidado preventivo para diabetes' %}
+            {% when 'callos' %}{% assign result_collection = collection_callos %}{% assign result_title = 'Protección para callos y presión' %}
+            {% when 'cuidado_diario' %}{% assign result_collection = collection_cuidado_diario %}{% assign result_title = 'Cuidado diario' %}
           {% endcase %}
           <div data-routine-result="{{ need_key }}" hidden>
             <div class="cmp-routine-result__heading"><p class="eyebrow">Tu punto de partida</p><h2>{{ result_title }}</h2><p>Esta selección es orientativa. Lee la ficha y precauciones de cada producto antes de usarlo.</p></div>
@@ -126,6 +135,9 @@
     { "type": "collection", "id": "collection_juanetes", "label": "Colección: juanetes" },
     { "type": "collection", "id": "collection_sudor", "label": "Colección: sudor y olor" },
     { "type": "collection", "id": "collection_confort", "label": "Colección: confort" },
+    { "type": "collection", "id": "collection_diabetes", "label": "Colección: diabetes" },
+    { "type": "collection", "id": "collection_callos", "label": "Colección: callos y presión" },
+    { "type": "collection", "id": "collection_cuidado_diario", "label": "Colección: cuidado diario" },
     { "type": "text", "id": "professional_label", "label": "Botón de orientación profesional", "default": "Ver opciones de orientación" },
     { "type": "url", "id": "professional_link", "label": "Enlace de orientación profesional" }
   ],

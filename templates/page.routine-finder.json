@@ -10,6 +10,9 @@
         "collection_juanetes": "juanetes-dedos",
         "collection_sudor": "sudor-mal-olor",
         "collection_confort": "talon-confort",
+        "collection_diabetes": "cuidado-pie-diabetes",
+        "collection_callos": "callos-roce-presion",
+        "collection_cuidado_diario": "",
         "professional_label": "Ver opciones de orientación",
         "professional_link": "/pages/orientacion"
       }

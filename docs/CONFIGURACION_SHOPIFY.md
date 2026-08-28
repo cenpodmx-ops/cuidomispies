@@ -51,13 +51,44 @@ En **Configuración → Datos personalizados → Colecciones**, crear:
 | `educational_content` | Texto enriquecido | Introducción educativa |
 | `when_to_consult` | Texto enriquecido | Señales de atención profesional |
 
+## Metaobjects
+
+En **Contenido → Metaobjects**, crear estas definiciones:
+
+### Metaobject `rutina` (para QR postventa y kits)
+
+| Campo | Tipo | Uso |
+|---|---|---|
+| `name` | Texto de una línea | Nombre de la rutina |
+| `need` | Texto de una línea | Necesidad asociada |
+| `steps` | Lista de textos | Pasos numerados |
+| `precautions` | Texto enriquecido | Precauciones |
+| `when_to_consult` | Texto enriquecido | Cuándo pedir orientación |
+| `related_products` | Lista de referencias a producto | Productos de la rutina |
+| `qr_content` | Texto de una línea | Contenido del QR |
+
+Asociar a productos de kit vía el metafield `cmp.rutina` (tipo: metaobject, referencia a `rutina`).
+
+### Metaobject `faq` (para página de preguntas frecuentes)
+
+| Campo | Tipo | Uso |
+|---|---|---|
+| `question` | Texto de una línea | Pregunta |
+| `answer` | Texto enriquecido | Respuesta |
+| `category` | Texto de una línea | Categoría (opcional) |
+| `order` | Entero | Orden de visualización |
+
+La sección `cmp-faq` busca este metaobject automáticamente. Crea las entradas en **Contenido → Metaobjects → faq → Ver todo** y se mostrarán en la página `/pages/preguntas-frecuentes`.
+
+Alternativamente, puedes añadir FAQs como blocks desde el editor del tema (sin metaobjects).
+
 ## Páginas necesarias
 
 Crear las páginas y asignar los handles indicados:
 
 - Encuentra tu rutina — `encuentra-tu-rutina`; asignar la plantilla `routine-finder`.
-- Orientación — `orientacion`.
-- Preguntas frecuentes — `preguntas-frecuentes`.
+- Orientación — `orientacion`; asignar la plantilla `orientacion`.
+- Preguntas frecuentes — `preguntas-frecuentes`; asignar la plantilla `faq`.
 - Envíos y entregas — `envios-y-entregas`.
 - Devoluciones — `devoluciones`.
 

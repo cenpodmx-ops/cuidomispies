@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "page"
+    },
+    "faq": {
+      "type": "cmp-faq",
+      "settings": {
+        "eyebrow": "Ayuda",
+        "heading": "Preguntas frecuentes",
+        "faq_metaobject": "faq",
+        "cta_label": "¿No encuentras tu respuesta? Escríbenos"
+      }
+    }
+  },
+  "order": ["main", "faq"]
+}
