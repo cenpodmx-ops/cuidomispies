@@ -33,7 +33,7 @@
         {% if settings.logo != blank %}
           {{ settings.logo | image_url: width: 520 | image_tag: widths: '220, 360, 520', sizes: '220px', width: settings.logo.width, height: settings.logo.height, alt: shop.name }}
         {% else %}
-          <img src="{{ 'cmp-logo.svg' | asset_url }}" width="220" height="54" alt="CuidoMisPies">
+          <img src="{{ 'cmp-logo-official.png' | asset_url }}" width="220" height="73" alt="CuidoMisPies — Soluciones para cada paso">
         {% endif %}
       </a>
       <p>{{ section.settings.brand_text }}</p>

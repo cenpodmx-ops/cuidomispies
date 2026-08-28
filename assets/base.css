@@ -85,16 +85,16 @@
 /* Variante primaria (alias explícito) */
 .button--primary { /* idéntico a .button; existe para markup explícito */ }
 
-/* Variante secundaria — borde teal, fondo transparente */
+/* Variante secundaria — relleno claro para mantener contraste */
 .button--secondary,
 .cmp-button--secondary {
-  background: transparent;
+  background: color-mix(in srgb, var(--cmp-sage) 36%, #fff);
   color: var(--cmp-teal);
   border-color: var(--cmp-teal);
 }
 .button--secondary:hover,
 .cmp-button--secondary:hover {
-  background: color-mix(in srgb, var(--cmp-teal) 8%, transparent);
+  background: color-mix(in srgb, var(--cmp-sage) 55%, #fff);
   color: var(--cmp-teal-dark);
 }
 

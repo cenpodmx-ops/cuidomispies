@@ -9,6 +9,10 @@
 .cmp-hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.6rem; }
 .cmp-hero__microcopy { display: flex; align-items: center; gap: .45rem; margin: 1.25rem 0 0; color: var(--color-text-muted); font-size: .82rem; }
 .cmp-hero__microcopy svg { width: 1rem; color: var(--color-primary); }
+.cmp-hero--default-banner .cmp-hero__inner { align-items: end; grid-template-columns: 1fr; padding-bottom: 2rem; }
+.cmp-hero--default-banner .cmp-hero__content { width: 100%; max-width: 58rem; margin-inline: auto; }
+.cmp-hero--default-banner .cmp-hero__actions, .cmp-hero--default-banner .cmp-hero__microcopy { justify-content: center; }
+.cmp-hero--default-banner .cmp-hero__microcopy { text-align: center; }
 .cmp-hero__fallback { position: relative; display: grid; height: 24rem; place-items: center; }
 .cmp-hero__fallback img { position: relative; z-index: 2; width: min(70%, 20rem); filter: drop-shadow(0 24px 24px rgba(18,72,65,.18)); }
 .cmp-hero__fallback span { position: absolute; width: 20rem; aspect-ratio: 1; border-radius: 50%; background: color-mix(in srgb, var(--color-primary) 14%, transparent); }

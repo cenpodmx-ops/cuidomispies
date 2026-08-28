@@ -8,7 +8,7 @@
       {% if settings.logo != blank %}
         {{ settings.logo | image_url: width: 440 | image_tag: widths: '180, 260, 360, 440', sizes: '(max-width: 749px) 150px, 190px', width: settings.logo.width, height: settings.logo.height, alt: shop.name }}
       {% else %}
-        <img src="{{ 'cmp-logo.svg' | asset_url }}" width="220" height="54" alt="CuidoMisPies">
+        <img src="{{ 'cmp-logo-official.png' | asset_url }}" width="220" height="73" alt="CuidoMisPies — Soluciones para cada paso">
       {% endif %}
     </a>
 
@@ -71,7 +71,7 @@
           {% if settings.logo != blank %}
             {{ settings.logo | image_url: width: 440 | image_tag: widths: '180, 260, 360, 440', sizes: '170px', width: settings.logo.width, height: settings.logo.height, alt: shop.name }}
           {% else %}
-            <img src="{{ 'cmp-logo.svg' | asset_url }}" width="180" height="44" alt="CuidoMisPies">
+            <img src="{{ 'cmp-logo-official.png' | asset_url }}" width="180" height="60" alt="CuidoMisPies — Soluciones para cada paso">
           {% endif %}
         </a>
         <button class="cmp-icon-button" type="button" data-mobile-menu-close aria-label="Cerrar menú">{% render 'icon', name: 'close' %}</button>
