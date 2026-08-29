@@ -10,7 +10,7 @@
     "type_body_font": "work_sans_n4",
     "page_width": 1300,
     "page_margin": 20,
-    "free_shipping_threshold": 600,
+    "free_shipping_threshold": 999,
     "cart_drawer_enabled": true
   },
   "presets": {
@@ -25,7 +25,7 @@
       "type_body_font": "work_sans_n4",
       "page_width": 1300,
       "page_margin": 20,
-      "free_shipping_threshold": 600,
+      "free_shipping_threshold": 999,
       "cart_drawer_enabled": true
     }
   }
