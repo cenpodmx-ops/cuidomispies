@@ -7,44 +7,66 @@
       "type": "cmp-guidance",
       "blocks": {
         "guidance-1": {
-          "type": "card",
+          "type": "item",
           "settings": {
             "title": "Ayuda para elegir producto",
-            "text": "¿No sabes cuál producto te conviene? Cuéntanos qué necesitas cuidar y te recomendamos la mejor opción o kit.",
-            "link_label": "WhatsApp",
+            "text": "Explora las preguntas frecuentes para entender mejor qué producto o rutina puede ajustarse a lo que necesitas cuidar.",
+            "link_label": "Ver preguntas frecuentes",
+            "link": "/pages/preguntas-frecuentes",
             "icon": "professional"
           }
         },
         "guidance-2": {
-          "type": "card",
+          "type": "item",
           "settings": {
-            "title": "Consulta profesional",
-            "text": "Si presentas una condición particular, lesión o necesitas valoración, conectamos con orientación profesional especializada en cuidado del pie.",
-            "link_label": "Solicitar consulta",
+            "title": "Cuándo pedir valoración",
+            "text": "Ante dolor intenso, heridas, secreción, pérdida de sensibilidad o cambios persistentes, suspende productos nuevos y consulta a un profesional de la salud.",
+            "link_label": "Ver recomendaciones",
+            "link": "/pages/preguntas-frecuentes",
             "icon": "shield"
           }
         },
         "guidance-3": {
-          "type": "card",
+          "type": "item",
           "settings": {
-            "title": "Quiz: Encuentra tu rutina",
-            "text": "Si prefieres empezar por tu cuenta, usa nuestro quiz de 5 preguntas para encontrar una rutina de cuidado.",
-            "link_label": "Empezar quiz",
-            "icon": "sparkles"
+            "title": "Encuentra tu rutina",
+            "text": "Responde cinco preguntas breves para organizar las opciones de cuidado según tu necesidad principal.",
+            "link_label": "Empezar cuestionario",
+            "link": "/pages/encuentra-tu-rutina",
+            "icon": "heart"
           }
         }
       },
       "block_order": ["guidance-1", "guidance-2", "guidance-3"],
       "settings": {
-        "heading": "Te ayudamos a elegir"
+        "eyebrow": "Orientación responsable",
+        "heading": "Te ayudamos a elegir",
+        "text": "Información práctica para tomar mejores decisiones de cuidado sin sustituir una valoración médica o podológica."
       }
     },
     "faq": {
       "type": "cmp-faq",
+      "blocks": {
+        "faq-1": {
+          "type": "faq",
+          "settings": {
+            "question": "¿El cuestionario realiza un diagnóstico?",
+            "answer": "<p>No. Organiza opciones de cuidado como punto de partida y no sustituye una evaluación médica o podológica.</p>"
+          }
+        },
+        "faq-2": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Qué hago si tengo diabetes o pérdida de sensibilidad?",
+            "answer": "<p>Evita automedicar lesiones y solicita orientación profesional antes de probar productos nuevos, especialmente si hay heridas, cambios de color o dolor.</p>"
+          }
+        }
+      },
+      "block_order": ["faq-1", "faq-2"],
       "settings": {
         "eyebrow": "Dudas comunes",
-        "heading": "Preguntas frecuentes sobre orientación",
-        "faq_metaobject": "faq"
+        "heading": "Orientación para un cuidado responsable",
+        "faq_metaobject": ""
       }
     }
   },

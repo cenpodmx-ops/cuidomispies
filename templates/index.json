@@ -38,7 +38,7 @@
         "eyebrow": "Selección CuidoMisPies",
         "heading": "Esenciales de cuidado diario",
         "text": "Una selección para empezar con pasos sencillos y constantes.",
-        "collection": "esenciales",
+        "collection": "all",
         "products_to_show": 4,
         "soft_background": true
       }
@@ -49,6 +49,7 @@
         "eyebrow": "Una rutina completa",
         "heading": "Kit de cuidado destacado",
         "text": "Reúne los pasos esenciales en una sola compra.",
+        "collection": "kits-por-necesidad",
         "button_label": "Ver todos los kits",
         "link": "/collections/kits-por-necesidad"
       }

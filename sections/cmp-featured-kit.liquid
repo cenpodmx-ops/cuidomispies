@@ -1,4 +1,7 @@
 {% assign kit = section.settings.product %}
+{% if kit == blank and section.settings.collection != blank %}
+  {% assign kit = section.settings.collection.products.first %}
+{% endif %}
 <section class="cmp-kit-feature section-spacing">
   <div class="page-width">
     <div class="cmp-kit-feature__card">
@@ -31,6 +34,7 @@
     { "type": "text", "id": "heading", "label": "Título alternativo", "default": "Kit de cuidado destacado" },
     { "type": "textarea", "id": "text", "label": "Texto alternativo", "default": "Reúne los pasos esenciales en una sola compra." },
     { "type": "product", "id": "product", "label": "Producto tipo kit" },
+    { "type": "collection", "id": "collection", "label": "Colección alternativa de kits", "info": "Si no eliges un producto, se mostrará el primer kit disponible de esta colección." },
     { "type": "image_picker", "id": "image", "label": "Imagen alternativa" },
     { "type": "text", "id": "button_label", "label": "Botón", "default": "Ver el kit" },
     { "type": "url", "id": "link", "label": "Enlace alternativo" }

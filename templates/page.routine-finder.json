@@ -12,7 +12,7 @@
         "collection_confort": "talon-y-confort",
         "collection_diabetes": "cuidado-del-pie-en-diabetes",
         "collection_callos": "callos-roce-y-presion",
-        "collection_cuidado_diario": "",
+        "collection_cuidado_diario": "all",
         "professional_label": "Ver opciones de orientación",
         "professional_link": "/pages/orientacion"
       }
