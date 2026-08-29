@@ -37,7 +37,7 @@
   {
     "name": "Comercio",
     "settings": [
-      { "type": "range", "id": "free_shipping_threshold", "min": 0, "max": 2000, "step": 25, "unit": "$", "label": "Monto para envío gratis", "default": 999 },
+      { "type": "range", "id": "free_shipping_threshold", "min": 0, "max": 2000, "step": 1, "unit": "$", "label": "Monto para envío gratis", "default": 999 },
       { "type": "checkbox", "id": "cart_drawer_enabled", "label": "Abrir carrito lateral al agregar", "default": true }
     ]
   },
