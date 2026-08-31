@@ -1397,7 +1397,7 @@ summary:focus-visible {
   font-size: 0.68rem;
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1390px) {
   .cmp-header__nav {
     display: none;
   }
@@ -1405,7 +1405,9 @@ summary:focus-visible {
   .cmp-header__menu-button {
     display: inline-flex;
   }
+}
 
+@media (max-width: 1180px) {
   .cmp-footer__main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
