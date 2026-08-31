@@ -30,6 +30,16 @@
 .cmp-accordion-group summary svg { width: 1rem; transition: transform 180ms ease; }
 .cmp-accordion-group details[open] summary svg { transform: rotate(180deg); }
 .cmp-accordion-group .rte { padding: 0 0 1rem; color: var(--color-text-muted); }
+.cmp-product-details .rte ol { display: grid; gap: .55rem; margin: 0; padding-left: 1.3rem; }
+.cmp-product-faq { margin-top: 2rem; padding: 1.35rem; border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-background-soft); }
+.cmp-product-faq > .eyebrow { margin-bottom: .25rem; }
+.cmp-product-faq h2 { margin: 0 0 .75rem; font-size: clamp(1.35rem, 2.5vw, 1.8rem); }
+.cmp-product-faq__list { display: grid; gap: .25rem; }
+.cmp-product-faq__list details { border-top: 1px solid var(--color-border); }
+.cmp-product-faq__list summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 0; font-weight: 750; cursor: pointer; }
+.cmp-product-faq__list summary span { font-size: 1.35rem; font-weight: 400; transition: transform 180ms ease; }
+.cmp-product-faq__list details[open] summary span { transform: rotate(45deg); }
+.cmp-product-faq__list details p { margin: -.1rem 0 1rem; color: var(--color-text-muted); }
 .cmp-product__info .cmp-safety-note { margin-top: 1.5rem; }
 .cmp-related-callout { display: grid; grid-template-columns: 1fr .8fr; gap: 2rem; align-items: center; margin-top: clamp(4rem, 8vw, 7rem); padding: clamp(1.5rem, 4vw, 3.5rem); border-radius: var(--radius-card); background: var(--color-background-soft); }
 .cmp-related-callout h2 { margin: .3rem 0; }

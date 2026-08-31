@@ -15,14 +15,14 @@
     "header": {
       "type": "cmp-header",
       "blocks": {
-        "hongos": { "type": "need", "settings": { "title": "Hongos", "subtitle": "Uñas, piel y calzado", "url": "/collections/hongos", "icon": "shield" } },
-        "diabetes": { "type": "need", "settings": { "title": "Cuidado en diabetes", "subtitle": "Protección e hidratación", "url": "/collections/cuidado-del-pie-en-diabetes", "icon": "heart" } },
-        "piel_seca": { "type": "need", "settings": { "title": "Talones y piel seca", "subtitle": "Resequedad y piel engrosada", "url": "/collections/talones-y-piel-seca", "icon": "drop" } },
-        "sudor": { "type": "need", "settings": { "title": "Sudor y mal olor", "subtitle": "Pies y calzado", "url": "/collections/sudor-y-mal-olor", "icon": "sparkles" } },
-        "juanetes": { "type": "need", "settings": { "title": "Juanetes y dedos", "subtitle": "Roce, separación y protección", "url": "/collections/juanetes-y-dedos", "icon": "foot" } },
-        "callos": { "type": "need", "settings": { "title": "Callos, roce y presión", "subtitle": "Protección localizada", "url": "/collections/callos-roce-y-presion", "icon": "foot" } },
-        "confort": { "type": "need", "settings": { "title": "Talón y confort", "subtitle": "Amortiguación y comodidad", "url": "/collections/talon-y-confort", "icon": "foot" } },
-        "kits": { "type": "need", "settings": { "title": "Kits por necesidad", "subtitle": "Rutinas completas", "url": "/collections/kits-por-necesidad", "icon": "sparkles" } }
+        "hongos": { "type": "need", "settings": { "title": "Hongos", "subtitle": "Uñas, piel y calzado", "url": "/collections/hongos", "icon": "fungus" } },
+        "diabetes": { "type": "need", "settings": { "title": "Cuidado en diabetes", "subtitle": "Protección e hidratación", "url": "/collections/cuidado-del-pie-en-diabetes", "icon": "diabetes" } },
+        "piel_seca": { "type": "need", "settings": { "title": "Talones y piel seca", "subtitle": "Resequedad y piel engrosada", "url": "/collections/talones-y-piel-seca", "icon": "dry-skin" } },
+        "sudor": { "type": "need", "settings": { "title": "Sudor y mal olor", "subtitle": "Pies y calzado", "url": "/collections/sudor-y-mal-olor", "icon": "odor" } },
+        "juanetes": { "type": "need", "settings": { "title": "Juanetes y dedos", "subtitle": "Roce, separación y protección", "url": "/collections/juanetes-y-dedos", "icon": "bunion" } },
+        "callos": { "type": "need", "settings": { "title": "Callos, roce y presión", "subtitle": "Protección localizada", "url": "/collections/callos-roce-y-presion", "icon": "callus" } },
+        "confort": { "type": "need", "settings": { "title": "Talón y confort", "subtitle": "Amortiguación y comodidad", "url": "/collections/talon-y-confort", "icon": "heel" } },
+        "kits": { "type": "need", "settings": { "title": "Kits por necesidad", "subtitle": "Rutinas completas", "url": "/collections/kits-por-necesidad", "icon": "kit" } }
       },
       "block_order": ["hongos", "diabetes", "piel_seca", "sudor", "juanetes", "callos", "confort", "kits"],
       "settings": { "menu": "", "sticky": true }

@@ -1,0 +1,151 @@
+{% liquid
+  assign detail_type = product.type | downcase
+  assign detail_title = product.title | downcase
+  assign is_device = false
+
+  if detail_type contains 'juanete' or detail_type contains 'callos' or detail_type contains 'confort'
+    assign is_device = true
+  endif
+%}
+
+{% capture purpose %}
+  {% if detail_type contains 'kit' %}
+    Reúne productos complementarios para seguir una rutina más clara y evitar elegir cada paso por separado. Revisa la descripción para conocer los componentes incluidos.
+  {% elsif detail_type contains 'hongos' %}
+    {% if detail_title contains 'terbinafina' %}
+      Está pensado para el cuidado localizado de uñas con signos compatibles con hongos, como cambio de color, engrosamiento o fragilidad.
+    {% elsif detail_title contains 'crema' %}
+      Apoya el cuidado de la piel de los pies cuando hay descamación, comezón o molestias compatibles con hongos.
+    {% elsif detail_title contains 'desodorante' %}
+      Ayuda a higienizar pies y calzado y a controlar los microorganismos relacionados con el mal olor.
+    {% else %}
+      Complementa la higiene de pies y uñas dentro de una rutina preventiva de cuidado externo.
+    {% endif %}
+  {% elsif detail_type contains 'diabetes' %}
+    Está pensado para una rutina diaria suave que ayude a proteger la piel, reducir el roce y conservar una hidratación adecuada.
+  {% elsif detail_type contains 'talones' or detail_type contains 'piel seca' %}
+    {% if detail_title contains 'urea 40' %}
+      Es un cuidado intensivo y localizado para piel muy engrosada o talones con resequedad marcada.
+    {% elsif detail_title contains 'urea 20' %}
+      Ayuda a suavizar e hidratar la piel seca y engrosada de talones y plantas.
+    {% else %}
+      Ayuda a recuperar suavidad y confort en piel seca o extremadamente seca.
+    {% endif %}
+  {% elsif detail_type contains 'sudor' %}
+    Ayuda a mantener los pies y el calzado más secos y frescos, disminuyendo humedad y mal olor dentro de la rutina diaria.
+  {% elsif detail_type contains 'juanete' %}
+    Ayuda a separar, alinear o proteger zonas de roce alrededor del juanete y los dedos, según el diseño del producto.
+  {% elsif detail_type contains 'callos' %}
+    Protege puntos específicos de roce y presión para mejorar el confort al caminar y dentro del calzado.
+  {% elsif detail_type contains 'confort' %}
+    Aporta amortiguación y descarga en talón o planta para mejorar la comodidad dentro del calzado.
+  {% else %}
+    Complementa una rutina de cuidado diario de los pies. Consulta la descripción y las indicaciones del envase antes de usarlo.
+  {% endif %}
+{% endcapture %}
+
+{% capture fallback_how %}
+  {% if detail_type contains 'kit' %}
+    <ol><li>Lee primero las indicaciones de cada componente.</li><li>Empieza con la higiene y seca muy bien los pies.</li><li>Aplica o coloca cada producto en el orden indicado en su envase.</li><li>Introduce la rutina gradualmente y observa la respuesta de la piel.</li></ol>
+  {% elsif is_device %}
+    <ol><li>Lava y seca la zona antes de colocarlo.</li><li>Ajusta el protector sin comprimir ni interrumpir la circulación.</li><li>Comienza con periodos cortos y aumenta el tiempo solo si resulta cómodo.</li><li>Lava el producto con agua y jabón suave y déjalo secar al aire.</li></ol>
+  {% elsif detail_title contains 'talco' %}
+    <ol><li>Aplica una cantidad ligera sobre los pies limpios y completamente secos.</li><li>Distribuye especialmente en zonas de sudoración, sin dejar acumulaciones entre los dedos.</li><li>También puede aplicarse al calzado siguiendo la etiqueta.</li></ol>
+  {% elsif detail_title contains 'desodorante' %}
+    <ol><li>Agita el producto si la etiqueta lo indica.</li><li>Aplica sobre pies limpios y secos o dentro del calzado.</li><li>Deja secar antes de colocarte calcetines o zapatos.</li></ol>
+  {% else %}
+    <ol><li>Lava y seca muy bien la zona.</li><li>Aplica una capa ligera únicamente donde se necesita.</li><li>Lávate las manos después de usarlo.</li><li>Respeta la frecuencia y cantidad indicadas en el envase.</li></ol>
+  {% endif %}
+{% endcapture %}
+
+{% capture fallback_precautions %}
+  {% if detail_type contains 'diabetes' %}
+    Revisa tus pies todos los días. No lo uses sobre heridas, ampollas o piel abierta. Si tienes pérdida de sensibilidad, cambios de color, calor, hinchazón o secreción, solicita valoración profesional antes de aplicar un producto nuevo.
+  {% elsif detail_title contains 'urea 40' %}
+    Úsalo solo en áreas engrosadas y nunca sobre grietas abiertas, irritación o entre los dedos. Si tienes diabetes, mala circulación o pérdida de sensibilidad, consulta antes de usar concentraciones intensivas.
+  {% elsif is_device %}
+    Retíralo si provoca dolor, entumecimiento, cambio de color, marcas persistentes o mayor irritación. No lo coloques sobre heridas y evita usarlo dentro de calzado demasiado ajustado.
+  {% else %}
+    Uso externo. Evita ojos, mucosas y piel lesionada. Suspende si aparece ardor intenso, irritación persistente o reacción inesperada. Mantén el producto fuera del alcance de niñas y niños.
+  {% endif %}
+{% endcapture %}
+
+{% capture faq_frequency %}
+  {% if detail_type contains 'kit' %}
+    Sigue la frecuencia de cada componente; no todos los productos del kit necesariamente se usan al mismo tiempo ni con la misma frecuencia.
+  {% elsif is_device %}
+    Comienza con periodos cortos. Aumenta el tiempo de uso gradualmente siempre que no haya presión, dolor ni cambios en la piel.
+  {% else %}
+    La frecuencia depende de la fórmula. Sigue la etiqueta del producto y evita aplicar más cantidad pensando que actuará más rápido.
+  {% endif %}
+{% endcapture %}
+
+{% capture faq_diabetes %}
+  {% if detail_type contains 'diabetes' %}
+    Fue seleccionado para una rutina cuidadosa, pero no debe aplicarse sobre lesiones. Ante pérdida de sensibilidad o problemas de circulación, confirma el uso con un profesional de salud.
+  {% elsif detail_title contains 'urea 40' or is_device %}
+    Si tienes diabetes, mala circulación o sensibilidad reducida, consulta antes de usarlo y revisa la piel después de cada aplicación o periodo de uso.
+  {% else %}
+    Puede requerir precauciones especiales. Si tienes diabetes, evita la automedicación sobre lesiones y consulta si existe pérdida de sensibilidad o mala circulación.
+  {% endif %}
+{% endcapture %}
+
+<div class="cmp-accordion-group cmp-product-details">
+  <details open>
+    <summary>Descripción{% render 'icon', name: 'chevron' %}</summary>
+    <div class="rte">{{ product.description }}</div>
+  </details>
+  <details>
+    <summary>Para qué sirve{% render 'icon', name: 'chevron' %}</summary>
+    <div class="rte"><p>{{ purpose | strip }}</p></div>
+  </details>
+  <details>
+    <summary>Cómo usar{% render 'icon', name: 'chevron' %}</summary>
+    <div class="rte">
+      {% if product.metafields.cmp.how_to_use.value != blank %}
+        {{ product.metafields.cmp.how_to_use | metafield_tag }}
+      {% else %}
+        {{ fallback_how }}
+      {% endif %}
+    </div>
+  </details>
+  {% if product.metafields.cmp.ingredients.value != blank %}
+    <details>
+      <summary>Ingredientes y presentación{% render 'icon', name: 'chevron' %}</summary>
+      <div class="rte">{{ product.metafields.cmp.ingredients | metafield_tag }}</div>
+    </details>
+  {% endif %}
+  <details>
+    <summary>Cuidados y precauciones{% render 'icon', name: 'chevron' %}</summary>
+    <div class="rte">
+      {% if product.metafields.cmp.precautions.value != blank %}
+        {{ product.metafields.cmp.precautions | metafield_tag }}
+      {% else %}
+        <p>{{ fallback_precautions | strip }}</p>
+      {% endif %}
+    </div>
+  </details>
+</div>
+
+<section class="cmp-product-faq" aria-labelledby="ProductFaq-{{ section.id }}">
+  <p class="eyebrow">Antes de usarlo</p>
+  <h2 id="ProductFaq-{{ section.id }}">Preguntas frecuentes</h2>
+  <div class="cmp-product-faq__list">
+    <details>
+      <summary>¿Con qué frecuencia debo usarlo?<span aria-hidden="true">+</span></summary>
+      <p>{{ faq_frequency | strip }}</p>
+    </details>
+    <details>
+      <summary>¿Puedo usarlo si tengo diabetes?<span aria-hidden="true">+</span></summary>
+      <p>{{ faq_diabetes | strip }}</p>
+    </details>
+    <details>
+      <summary>¿En cuánto tiempo notaré cambios?<span aria-hidden="true">+</span></summary>
+      <p>Depende de la necesidad, la constancia y el producto. Evitamos prometer resultados en un plazo fijo; si no hay mejoría o la molestia aumenta, solicita orientación profesional.</p>
+    </details>
+    <details>
+      <summary>¿Cuándo debo suspender su uso?<span aria-hidden="true">+</span></summary>
+      <p>Suspende si aparece dolor, ardor intenso, irritación persistente, entumecimiento, cambio de color o una lesión. Ante secreción, hinchazón importante o fiebre, busca atención médica.</p>
+    </details>
+  </div>
+</section>

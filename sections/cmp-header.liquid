@@ -19,7 +19,7 @@
           <div class="cmp-nav-dropdown__grid">
             {% for block in section.blocks %}
               <a class="cmp-nav-need" href="{{ block.settings.url | default: routes.collections_url }}" {{ block.shopify_attributes }}>
-                <span class="cmp-nav-need__icon">{% render 'icon', name: block.settings.icon %}</span>
+                <span class="cmp-nav-need__icon">{% render 'need-icon', title: block.settings.title, icon: block.settings.icon %}</span>
                 <span>
                   <strong>{{ block.settings.title }}</strong>
                   <small>{{ block.settings.subtitle }}</small>
@@ -80,7 +80,7 @@
       <div class="cmp-mobile-menu__needs">
         {% for block in section.blocks %}
           <a href="{{ block.settings.url | default: routes.collections_url }}">
-            <span>{% render 'icon', name: block.settings.icon %}</span>
+            <span>{% render 'need-icon', title: block.settings.title, icon: block.settings.icon %}</span>
             <span><strong>{{ block.settings.title }}</strong><small>{{ block.settings.subtitle }}</small></span>
             {% render 'icon', name: 'chevron' %}
           </a>
@@ -127,7 +127,15 @@
             { "value": "heart", "label": "Corazón" },
             { "value": "drop", "label": "Gota" },
             { "value": "foot", "label": "Pie" },
-            { "value": "sparkles", "label": "Cuidado diario" }
+            { "value": "sparkles", "label": "Cuidado diario" },
+            { "value": "fungus", "label": "Hongos" },
+            { "value": "diabetes", "label": "Diabetes" },
+            { "value": "dry-skin", "label": "Piel seca" },
+            { "value": "odor", "label": "Sudor y olor" },
+            { "value": "bunion", "label": "Juanete" },
+            { "value": "callus", "label": "Callos y presión" },
+            { "value": "heel", "label": "Talón" },
+            { "value": "kit", "label": "Kit" }
           ]
         }
       ]

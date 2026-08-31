@@ -141,30 +141,7 @@
           <li>{% render 'icon', name: 'professional' %}<span>Orientación clara para elegir mejor</span></li>
         </ul>
 
-        <div class="cmp-accordion-group">
-          <details open>
-            <summary>Descripción{% render 'icon', name: 'chevron' %}</summary>
-            <div class="rte">{{ product.description }}</div>
-          </details>
-          {% if product.metafields.cmp.how_to_use.value != blank %}
-            <details>
-              <summary>Cómo usar{% render 'icon', name: 'chevron' %}</summary>
-              <div class="rte">{{ product.metafields.cmp.how_to_use | metafield_tag }}</div>
-            </details>
-          {% endif %}
-          {% if product.metafields.cmp.ingredients.value != blank %}
-            <details>
-              <summary>Ingredientes y presentación{% render 'icon', name: 'chevron' %}</summary>
-              <div class="rte">{{ product.metafields.cmp.ingredients | metafield_tag }}</div>
-            </details>
-          {% endif %}
-          {% if product.metafields.cmp.precautions.value != blank %}
-            <details>
-              <summary>Precauciones{% render 'icon', name: 'chevron' %}</summary>
-              <div class="rte">{{ product.metafields.cmp.precautions | metafield_tag }}</div>
-            </details>
-          {% endif %}
-        </div>
+        {% render 'product-details', product: product, section: section %}
 
         {% if product.metafields.cmp.when_to_consult.value != blank %}
           <aside class="cmp-safety-note">

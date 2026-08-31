@@ -1,0 +1,22 @@
+{% liquid
+  assign need_icon = icon | default: 'foot'
+  case title
+    when 'Hongos'
+      assign need_icon = 'fungus'
+    when 'Cuidado en diabetes', 'Cuidado del pie en diabetes'
+      assign need_icon = 'diabetes'
+    when 'Talones y piel seca'
+      assign need_icon = 'dry-skin'
+    when 'Sudor y mal olor'
+      assign need_icon = 'odor'
+    when 'Juanetes y dedos'
+      assign need_icon = 'bunion'
+    when 'Callos, roce y presión'
+      assign need_icon = 'callus'
+    when 'Talón y confort'
+      assign need_icon = 'heel'
+    when 'Kits por necesidad', 'Kits'
+      assign need_icon = 'kit'
+  endcase
+%}
+{% render 'icon', name: need_icon %}
