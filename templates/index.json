@@ -5,7 +5,7 @@
       "settings": {
         "eyebrow": "Bienestar y cuidado diario",
         "heading": "Cuidado profesional para cada paso",
-        "text": "<p>Soluciones especializadas para el cuidado diario de tus pies.</p>",
+        "text": "<p>Productos especializados, kits y rutinas para las necesidades más comunes de tus pies.</p>",
         "primary_label": "Encontrar mi solución",
         "primary_link": "/pages/encuentra-tu-rutina",
         "secondary_label": "Explorar productos",
@@ -35,10 +35,14 @@
     "featured_products": {
       "type": "cmp-featured-collection",
       "settings": {
-        "eyebrow": "Selección CuidoMisPies",
-        "heading": "Esenciales de cuidado diario",
-        "text": "Una selección para empezar con pasos sencillos y constantes.",
+        "eyebrow": "Soluciones para necesidades frecuentes",
+        "heading": "Empieza por lo que hoy te preocupa",
+        "text": "Rutinas y productos protagonistas para uñas, talones, roce y cuidado preventivo.",
         "collection": "all",
+        "product_1": "kit-antihongos-unas-calzado",
+        "product_2": "urea-40-gel",
+        "product_3": "separador-gel-protector-juanete",
+        "product_4": "kit-cuidado-diario-diabetes",
         "products_to_show": 4,
         "soft_background": true
       }
@@ -47,10 +51,11 @@
       "type": "cmp-featured-kit",
       "settings": {
         "eyebrow": "Una rutina completa",
-        "heading": "Kit de cuidado destacado",
-        "text": "Reúne los pasos esenciales en una sola compra.",
+        "heading": "Kit Talones Intensivo",
+        "text": "Una rutina organizada para hidratar, suavizar y cuidar talones con resequedad marcada.",
+        "product": "kit-talones-intensivo",
         "collection": "kits-por-necesidad",
-        "button_label": "Ver todos los kits",
+        "button_label": "Ver la rutina completa",
         "link": "/collections/kits-por-necesidad"
       }
     },
@@ -69,7 +74,7 @@
       "blocks": {
         "clear": { "type": "item", "settings": { "icon": "heart", "title": "Uso claro", "text": "Cada ficha explica para qué sirve, cómo se usa y qué precauciones considerar.", "link_label": "Explorar productos", "link": "/collections/all" } },
         "safe": { "type": "item", "settings": { "icon": "professional", "title": "Señales de alerta", "text": "Te indicamos cuándo conviene suspender el uso y buscar atención profesional.", "link_label": "Leer orientación", "link": "/pages/orientacion" } },
-        "delivery": { "type": "item", "settings": { "icon": "truck", "title": "Compra segura", "text": "Carrito, inventario, pagos y seguimiento gestionados de forma nativa por Shopify.", "link_label": "Preguntas frecuentes", "link": "/pages/preguntas-frecuentes" } }
+        "delivery": { "type": "item", "settings": { "icon": "truck", "title": "Compra segura", "text": "Pagos protegidos y seguimiento claro de tu pedido.", "link_label": "Preguntas frecuentes", "link": "/pages/preguntas-frecuentes" } }
       },
       "block_order": ["clear", "safe", "delivery"],
       "settings": {

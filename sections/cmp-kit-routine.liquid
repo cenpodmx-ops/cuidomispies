@@ -1,34 +1,132 @@
 {% liquid
   assign routine_steps = product.metafields.cmp.routine_steps.value
   assign kit_products = product.metafields.cmp.kit_products.value
+  assign mapped_handles = blank
+  assign mapped_roles = blank
+
+  case product.handle
+    when 'kit-antihongos-unas-calzado'
+      assign mapped_handles = 'solucion-antifungica-unas,desodorante-biocida-pies-calzado,aceite-tea-tree-neem'
+      assign mapped_roles = 'Cuidado localizado de uñas|Higiene de pies y calzado|Complemento cotidiano'
+    when 'kit-antihongos-piel-calzado'
+      assign mapped_handles = 'crema-hongos-piel-pies,desodorante-biocida-pies-calzado,desodorante-en-talco'
+      assign mapped_roles = 'Cuidado tópico de la piel|Higiene de pies y calzado|Control complementario de humedad'
+    when 'kit-antihongos-completo'
+      assign mapped_handles = 'solucion-antifungica-unas,crema-hongos-piel-pies,desodorante-biocida-pies-calzado,aceite-tea-tree-neem'
+      assign mapped_roles = 'Cuidado localizado de uñas|Cuidado tópico de la piel|Higiene de pies y calzado|Complemento cotidiano'
+    when 'kit-talones-intensivo'
+      assign mapped_handles = 'urea-20-gel,dryskin-piel-extremadamente-seca'
+      assign mapped_roles = 'Suavidad e hidratación diaria|Cuidado para resequedad intensa'
+    when 'kit-talones-sos'
+      assign mapped_handles = 'urea-40-gel,dryskin-piel-extremadamente-seca,pedicreme-mousse-relajante'
+      assign mapped_roles = 'Cuidado intensivo localizado|Hidratación para piel extremadamente seca|Confort y cuidado complementario'
+    when 'kit-pie-calzado-sudor-olor'
+      assign mapped_handles = 'antitranspirante-pies,desodorante-en-talco,desodorante-biocida-pies-calzado'
+      assign mapped_roles = 'Control de sudoración|Frescura y absorción|Higiene de pies y calzado'
+    when 'kit-juanete-diario'
+      assign mapped_handles = 'corrector-nocturno-juanete,separador-gel-protector-juanete'
+      assign mapped_roles = 'Alineación gradual durante el descanso|Separación y protección durante el día'
+    when 'kit-dedos-sin-roce'
+      assign mapped_handles = 'anillos-protectores-gel,protector-punto-de-gel,protector-de-dedos'
+      assign mapped_roles = 'Protección alrededor del dedo|Amortiguación puntual|Protección tubular del dedo'
+    when 'kit-cuidado-diario-diabetes'
+      assign mapped_handles = 'calcetin-para-diabetico,crema-humectante-diabetico,desodorante-biocida-pies-calzado'
+      assign mapped_roles = 'Protección y menor presión|Hidratación cotidiana|Higiene complementaria de pies y calzado'
+  endcase
+
+  if mapped_handles != blank
+    assign component_handles = mapped_handles | split: ','
+    assign component_roles = mapped_roles | split: '|'
+  endif
+
+  assign individual_total = 0
+  if kit_products != blank
+    for kit_product in kit_products
+      assign individual_total = individual_total | plus: kit_product.price
+    endfor
+  elsif component_handles != blank
+    for component_handle in component_handles
+      assign mapped_product = all_products[component_handle]
+      assign individual_total = individual_total | plus: mapped_product.price
+    endfor
+  endif
+  assign kit_savings = individual_total | minus: product.price
 %}
 
-{% if routine_steps != blank or kit_products != blank %}
+{% if product.type contains 'Kit' or routine_steps != blank or kit_products != blank or component_handles != blank %}
   <section class="cmp-kit-routine section-spacing cmp-section--soft">
     <div class="page-width">
-      {% if routine_steps != blank %}
-        <div class="section-heading section-heading--center"><p class="eyebrow">Cómo usar tu kit</p><h2>Una rutina, paso a paso</h2></div>
-        <ol class="cmp-kit-steps">
+      <div class="section-heading section-heading--center">
+        <p class="eyebrow">Todo organizado</p>
+        <h2>Tu rutina, paso a paso</h2>
+        <p>Cada producto conserva sus propias indicaciones. Revisa el envase antes de combinar aplicaciones.</p>
+      </div>
+
+      <ol class="cmp-kit-steps">
+        {% if routine_steps != blank %}
           {% for step in routine_steps %}<li><span>{{ forloop.index }}</span><p>{{ step }}</p></li>{% endfor %}
-        </ol>
-      {% endif %}
-      {% if kit_products != blank %}
-        <div class="section-heading"><p class="eyebrow">Incluye</p><h2>Productos dentro de este kit</h2></div>
-        <div class="cmp-product-grid">
-          {% for kit_product in kit_products limit: 4 %}{% render 'product-card', card_product: kit_product, quick_add: false %}{% endfor %}
+        {% else %}
+          <li><span>1</span><p>Revisa las indicaciones y precauciones de todos los componentes.</p></li>
+          <li><span>2</span><p>Lava y seca muy bien los pies, especialmente entre los dedos.</p></li>
+          <li><span>3</span><p>Usa primero el producto dirigido a tu necesidad principal, según su etiqueta.</p></li>
+          <li><span>4</span><p>Integra los complementos gradualmente y observa la respuesta de la piel.</p></li>
+        {% endif %}
+      </ol>
+
+      {% if individual_total > product.price %}
+        <div class="cmp-kit-value" aria-label="Comparación de precio del kit">
+          <div><span>Por separado</span><s>{{ individual_total | money }}</s></div>
+          <div><span>Precio del kit</span><strong>{{ product.price | money }}</strong></div>
+          <div class="cmp-kit-value__saving"><span>Ahorras</span><strong>{{ kit_savings | money }}</strong></div>
         </div>
       {% endif %}
+
+      <div class="section-heading"><p class="eyebrow">Qué incluye</p><h2>El papel de cada producto</h2></div>
+      <div class="cmp-kit-components">
+        {% if kit_products != blank %}
+          {% for kit_product in kit_products limit: 4 %}
+            <a class="cmp-kit-component" href="{{ kit_product.url }}">
+              {% if kit_product.featured_image %}{{ kit_product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '280, 480, 700', sizes: '(min-width: 990px) 23vw, 46vw', alt: kit_product.featured_image.alt | default: kit_product.title }}{% endif %}
+              <div><span>Componente {{ forloop.index }}</span><h3>{{ kit_product.title }}</h3><p>Consulta su ficha para conocer uso y precauciones.</p></div>
+            </a>
+          {% endfor %}
+        {% elsif component_handles != blank %}
+          {% for component_handle in component_handles %}
+            {% assign kit_product = all_products[component_handle] %}
+            {% if kit_product != blank %}
+              <a class="cmp-kit-component" href="{{ kit_product.url }}">
+                {% if kit_product.featured_image %}{{ kit_product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '280, 480, 700', sizes: '(min-width: 990px) 23vw, 46vw', alt: kit_product.featured_image.alt | default: kit_product.title }}{% endif %}
+                <div><span>{{ component_roles[forloop.index0] }}</span><h3>{{ kit_product.title }}</h3><p>{{ kit_product.metafields.cmp.short_description.value | default: kit_product.description | strip_html | truncate: 115 }}</p></div>
+              </a>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
     </div>
   </section>
 {% endif %}
 
 {% stylesheet %}
-  .cmp-kit-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 0 0 4rem; padding: 0; list-style: none; }
-  .cmp-kit-steps li { padding: 1.25rem; border-radius: var(--radius-card); background: #fff; }
+  .cmp-kit-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 0 0 2rem; padding: 0; list-style: none; }
+  .cmp-kit-steps li { padding: 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius-card); background: #fff; }
   .cmp-kit-steps span { display: grid; width: 2rem; aspect-ratio: 1; place-items: center; border-radius: 50%; background: var(--color-primary); color: #fff; font-weight: 800; }
   .cmp-kit-steps p { margin-bottom: 0; color: var(--color-text-muted); }
-  @media (max-width: 749px) { .cmp-kit-steps { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 449px) { .cmp-kit-steps { grid-template-columns: 1fr; } }
+  .cmp-kit-value { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; overflow: hidden; margin: 0 0 clamp(3rem, 7vw, 5rem); border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-border); }
+  .cmp-kit-value > div { display: grid; gap: .2rem; padding: 1.2rem; background: #fff; text-align: center; }
+  .cmp-kit-value span { color: var(--color-text-muted); font-size: .82rem; }
+  .cmp-kit-value strong, .cmp-kit-value s { font-size: 1.25rem; }
+  .cmp-kit-value__saving { background: color-mix(in srgb, var(--color-primary) 8%, #fff) !important; color: var(--color-primary); }
+  .cmp-kit-components { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .cmp-kit-component { overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-card); background: #fff; color: inherit; text-decoration: none; transition: transform 180ms ease, box-shadow 180ms ease; }
+  .cmp-kit-component:hover { transform: translateY(-3px); box-shadow: var(--shadow-card); }
+  .cmp-kit-component img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--color-background-soft); }
+  .cmp-kit-component div { padding: 1rem; }
+  .cmp-kit-component span { color: var(--color-primary); font-size: .72rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+  .cmp-kit-component h3 { margin: .35rem 0; font-size: 1.05rem; }
+  .cmp-kit-component p { margin: 0; color: var(--color-text-muted); font-size: .85rem; }
+  @media (max-width: 989px) { .cmp-kit-steps, .cmp-kit-components { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 599px) { .cmp-kit-value { grid-template-columns: 1fr; } }
+  @media (max-width: 449px) { .cmp-kit-steps, .cmp-kit-components { grid-template-columns: 1fr; } }
 {% endstylesheet %}
 
 {% schema %}

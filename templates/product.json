@@ -12,9 +12,14 @@
     "main": {
       "type": "main-product",
       "settings": {}
+    },
+    "kit_routine": {
+      "type": "cmp-kit-routine",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "kit_routine"
   ]
 }

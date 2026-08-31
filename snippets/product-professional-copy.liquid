@@ -1,0 +1,102 @@
+{% liquid
+  assign copy_type = product.type | downcase
+  assign copy_title = product.title | downcase
+  assign is_kit = false
+  assign is_device = false
+  if copy_type contains 'kit'
+    assign is_kit = true
+  endif
+  if copy_type contains 'juanete' or copy_type contains 'callos' or copy_type contains 'confort'
+    assign is_device = true
+  endif
+%}
+
+{% case field %}
+  {% when 'lead' %}
+    {% if is_kit %}
+      Una rutina organizada para reunir productos complementarios en una sola compra y seguir cada paso con mayor claridad.
+    {% elsif copy_type contains 'hongos' %}
+      {% if copy_title contains 'terbinafina' %}
+        Cuidado localizado para integrar a la rutina de uñas con cambios de color, engrosamiento o fragilidad compatibles con hongos.
+      {% elsif copy_title contains 'crema' %}
+        Cuidado tópico para la piel de los pies con descamación, comezón o molestias compatibles con hongos.
+      {% elsif copy_title contains 'desodorante' %}
+        Higiene complementaria para pies y calzado que ayuda a controlar la humedad, los microorganismos y el mal olor.
+      {% else %}
+        Complemento de higiene cotidiana para uñas y piel, pensado para acompañar una rutina constante de cuidado externo.
+      {% endif %}
+    {% elsif copy_type contains 'diabetes' %}
+      {% if copy_title contains 'calcet' %}
+        Protección suave para el uso diario, pensada para reducir presión, marcas y roce dentro del calzado.
+      {% else %}
+        Hidratación y cuidado cotidiano para ayudar a conservar la piel flexible, confortable y protegida.
+      {% endif %}
+    {% elsif copy_type contains 'talones' or copy_type contains 'piel seca' %}
+      {% if copy_title contains 'urea 40' %}
+        Cuidado intensivo y localizado para talones o zonas con resequedad marcada y piel muy engrosada.
+      {% elsif copy_title contains 'urea 20' %}
+        Hidratación diaria para suavizar talones, plantas y otras zonas con piel seca o engrosada.
+      {% elsif copy_title contains 'dryskin' %}
+        Cuidado emoliente para piel extremadamente seca que necesita hidratación constante y mayor confort.
+      {% else %}
+        Cuidado diario para aportar suavidad, hidratación y una sensación de descanso a pies y piernas.
+      {% endif %}
+    {% elsif copy_type contains 'sudor' %}
+      {% if copy_title contains 'antitranspirante' %}
+        Control cotidiano de la sudoración para mantener los pies más secos y cómodos durante el día.
+      {% else %}
+        Frescura y control del mal olor para integrar a la higiene diaria de pies y calzado.
+      {% endif %}
+    {% elsif copy_type contains 'juanete' %}
+      Protección localizada para disminuir el roce alrededor del juanete y mejorar el confort dentro del calzado.
+    {% elsif copy_type contains 'callos' %}
+      Amortiguación localizada para proteger zonas sensibles frente al roce y la presión cotidiana.
+    {% elsif copy_type contains 'confort' %}
+      Soporte y amortiguación para mejorar la comodidad del talón o la planta dentro del calzado.
+    {% else %}
+      Una solución práctica para complementar el cuidado diario de tus pies con indicaciones y precauciones claras.
+    {% endif %}
+
+  {% when 'audience' %}
+    {% if is_kit %}
+      Para quienes prefieren una rutina ya organizada y desean evitar elegir cada componente por separado.
+    {% elsif copy_type contains 'hongos' %}
+      Para personas que buscan complementar el cuidado de uñas, piel o calzado ante señales compatibles con hongos, humedad o mal olor.
+    {% elsif copy_type contains 'diabetes' %}
+      Para una rutina preventiva y cuidadosa del pie. Si existe pérdida de sensibilidad, mala circulación o una lesión, conviene consultar antes de usar un producto nuevo.
+    {% elsif copy_type contains 'talones' or copy_type contains 'piel seca' %}
+      Para piel seca, áspera o engrosada que necesita hidratación y suavidad. La concentración y frecuencia deben elegirse según la condición de la piel.
+    {% elsif copy_type contains 'sudor' %}
+      Para quienes presentan sudoración o mal olor y desean complementar la higiene diaria de pies y calzado.
+    {% elsif is_device %}
+      Para quienes buscan proteger o amortiguar una zona específica de roce, presión o incomodidad dentro del calzado.
+    {% else %}
+      Para quienes desean incorporar un paso sencillo y constante a su rutina de cuidado de los pies.
+    {% endif %}
+
+  {% when 'consult' %}
+    {% if copy_type contains 'diabetes' %}
+      Solicita valoración si hay herida, ampolla, secreción, cambio de color, calor, hinchazón, dolor o pérdida de sensibilidad. No apliques productos nuevos sobre piel abierta.
+    {% elsif copy_title contains 'urea 40' %}
+      Pide orientación si hay grietas profundas, sangrado, dolor, infección aparente, diabetes, mala circulación o sensibilidad reducida.
+    {% elsif is_device %}
+      Retira el producto y solicita orientación si aparece dolor, entumecimiento, cambio de color, inflamación o una marca que no desaparece al poco tiempo.
+    {% else %}
+      Suspende el uso y pide orientación si aparece irritación persistente, dolor, inflamación, secreción, cambio de color o si la molestia empeora.
+    {% endif %}
+
+  {% when 'benefits' %}
+    {% if is_kit %}
+      <li>{% render 'icon', name: 'heart' %}<span>Pasos complementarios en una sola rutina</span></li>
+      <li>{% render 'icon', name: 'shield' %}<span>Indicaciones y precauciones visibles</span></li>
+      <li>{% render 'icon', name: 'sparkles' %}<span>Más fácil de seguir y volver a comprar</span></li>
+    {% elsif is_device %}
+      <li>{% render 'icon', name: 'heart' %}<span>Protección localizada donde la necesitas</span></li>
+      <li>{% render 'icon', name: 'shield' %}<span>Uso gradual con señales claras para suspender</span></li>
+      <li>{% render 'icon', name: 'sparkles' %}<span>Diseñado para mejorar el confort cotidiano</span></li>
+    {% else %}
+      <li>{% render 'icon', name: 'heart' %}<span>Un paso claro para tu rutina diaria</span></li>
+      <li>{% render 'icon', name: 'shield' %}<span>Precauciones importantes antes de usarlo</span></li>
+      <li>{% render 'icon', name: 'sparkles' %}<span>Puede combinarse con una rutina completa</span></li>
+    {% endif %}
+{% endcase %}

@@ -40,6 +40,10 @@
 .cmp-product-faq__list summary span { font-size: 1.35rem; font-weight: 400; transition: transform 180ms ease; }
 .cmp-product-faq__list details[open] summary span { transform: rotate(45deg); }
 .cmp-product-faq__list details p { margin: -.1rem 0 1rem; color: var(--color-text-muted); }
+.cmp-product-reviews { margin-top: 1.25rem; padding: 1.35rem; border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-surface); }
+.cmp-product-reviews h2 { margin: .2rem 0; font-size: 1.35rem; }
+.cmp-product-reviews__score { margin: .35rem 0 0; color: var(--color-text-muted); }
+.cmp-product-reviews__score strong { color: var(--color-primary); font-size: 1.4rem; }
 .cmp-product__info .cmp-safety-note { margin-top: 1.5rem; }
 .cmp-related-callout { display: grid; grid-template-columns: 1fr .8fr; gap: 2rem; align-items: center; margin-top: clamp(4rem, 8vw, 7rem); padding: clamp(1.5rem, 4vw, 3.5rem); border-radius: var(--radius-card); background: var(--color-background-soft); }
 .cmp-related-callout h2 { margin: .3rem 0; }

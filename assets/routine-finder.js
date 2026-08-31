@@ -48,10 +48,14 @@ class RoutineFinder {
 
     const needsProfessional = data.get('red_flags') === 'yes' || data.get('special_care') === 'yes';
     const target = needsProfessional ? 'safety' : data.get('need');
+    const mode = data.get('routine');
     this.form.hidden = true;
     this.result.hidden = false;
     this.root.querySelectorAll('[data-routine-result]').forEach((panel) => {
       panel.hidden = panel.dataset.routineResult !== target;
+    });
+    this.root.querySelectorAll('[data-routine-mode]').forEach((recommendation) => {
+      recommendation.hidden = recommendation.dataset.routineMode !== mode;
     });
     // Mover foco al resultado y scroll respetando prefers-reduced-motion
     const heading = this.result.querySelector('h2, [data-routine-title]');

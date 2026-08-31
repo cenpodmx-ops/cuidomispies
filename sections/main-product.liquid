@@ -4,6 +4,36 @@
   assign current_variant = product.selected_or_first_available_variant
   assign related_kit = product.metafields.cmp.related_kit.value
   assign cross_sell = product.metafields.cmp.cross_sell.value
+  assign product_type_downcase = product.type | downcase
+  assign product_title_downcase = product.title | downcase
+
+  if related_kit == blank and product_type_downcase contains 'hongos'
+    if product_title_downcase contains 'crema' or product_title_downcase contains 'talco'
+      assign related_kit = all_products['kit-antihongos-piel-calzado']
+    elsif product_title_downcase contains 'terbinafina' or product_title_downcase contains 'tea tree' or product_title_downcase contains 'desodorante'
+      assign related_kit = all_products['kit-antihongos-unas-calzado']
+    else
+      assign related_kit = all_products['kit-antihongos-completo']
+    endif
+  elsif related_kit == blank and product_type_downcase contains 'talones'
+    if product_title_downcase contains 'urea 20'
+      assign related_kit = all_products['kit-talones-intensivo']
+    else
+      assign related_kit = all_products['kit-talones-sos']
+    endif
+  elsif related_kit == blank and product_type_downcase contains 'juanete'
+    assign related_kit = all_products['kit-juanete-diario']
+  elsif related_kit == blank and product_type_downcase contains 'callos'
+    assign related_kit = all_products['kit-dedos-sin-roce']
+  elsif related_kit == blank and product_type_downcase contains 'sudor'
+    assign related_kit = all_products['kit-pie-calzado-sudor-olor']
+  elsif related_kit == blank and product_type_downcase contains 'diabetes'
+    assign related_kit = all_products['kit-cuidado-diario-diabetes']
+  endif
+
+  capture professional_lead
+    render 'product-professional-copy', product: product, field: 'lead'
+  endcapture
 %}
 
 <section class="cmp-product section-spacing" data-product-section>
@@ -52,18 +82,18 @@
           <p class="eyebrow">{{ product.metafields.cmp.care_level.value }}</p>
         {% endif %}
         <h1>{{ product.title }}</h1>
-        {% if product.metafields.cmp.short_description.value != blank %}
-          <p class="cmp-product__lead">{{ product.metafields.cmp.short_description.value | escape }}</p>
-        {% endif %}
+        <p class="cmp-product__lead">{{ product.metafields.cmp.short_description.value | default: professional_lead | strip | escape }}</p>
         {% render 'price', product: product %}
 
-        {% if product.metafields.cmp.benefits.value != blank %}
-          <ul class="cmp-benefit-list">
+        <ul class="cmp-benefit-list">
+          {% if product.metafields.cmp.benefits.value != blank %}
             {% for benefit in product.metafields.cmp.benefits.value %}
               <li>{% render 'icon', name: 'heart' %}<span>{{ benefit }}</span></li>
             {% endfor %}
-          </ul>
-        {% endif %}
+          {% else %}
+            {% render 'product-professional-copy', product: product, field: 'benefits' %}
+          {% endif %}
+        </ul>
 
         <form class="cmp-product-form" method="post" action="{{ routes.cart_add_url }}" enctype="multipart/form-data" data-product-form>
           {% unless product.has_only_default_variant %}
@@ -143,12 +173,17 @@
 
         {% render 'product-details', product: product, section: section %}
 
-        {% if product.metafields.cmp.when_to_consult.value != blank %}
-          <aside class="cmp-safety-note">
-            {% render 'icon', name: 'professional' %}
-            <div><strong>Cuándo buscar atención profesional</strong>{{ product.metafields.cmp.when_to_consult | metafield_tag }}</div>
-          </aside>
-        {% endif %}
+        <aside class="cmp-safety-note">
+          {% render 'icon', name: 'professional' %}
+          <div>
+            <strong>Cuándo conviene pedir orientación</strong>
+            {% if product.metafields.cmp.when_to_consult.value != blank %}
+              {{ product.metafields.cmp.when_to_consult | metafield_tag }}
+            {% else %}
+              <p>{% render 'product-professional-copy', product: product, field: 'consult' %}</p>
+            {% endif %}
+          </div>
+        </aside>
       </div>
     </div>
 

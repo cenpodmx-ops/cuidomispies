@@ -6,6 +6,14 @@
   if detail_type contains 'juanete' or detail_type contains 'callos' or detail_type contains 'confort'
     assign is_device = true
   endif
+
+  capture professional_lead
+    render 'product-professional-copy', product: product, field: 'lead'
+  endcapture
+
+  capture professional_audience
+    render 'product-professional-copy', product: product, field: 'audience'
+  endcapture
 %}
 
 {% capture purpose %}
@@ -92,12 +100,19 @@
 
 <div class="cmp-accordion-group cmp-product-details">
   <details open>
-    <summary>Descripción{% render 'icon', name: 'chevron' %}</summary>
-    <div class="rte">{{ product.description }}</div>
+    <summary>Descripción profesional{% render 'icon', name: 'chevron' %}</summary>
+    <div class="rte">
+      <p><strong>{{ professional_lead | strip }}</strong></p>
+      {% if product.description != blank %}{{ product.description }}{% endif %}
+    </div>
   </details>
   <details>
     <summary>Para qué sirve{% render 'icon', name: 'chevron' %}</summary>
     <div class="rte"><p>{{ purpose | strip }}</p></div>
+  </details>
+  <details>
+    <summary>Para quién puede ser útil{% render 'icon', name: 'chevron' %}</summary>
+    <div class="rte"><p>{{ professional_audience | strip }}</p></div>
   </details>
   <details>
     <summary>Cómo usar{% render 'icon', name: 'chevron' %}</summary>
@@ -109,12 +124,21 @@
       {% endif %}
     </div>
   </details>
-  {% if product.metafields.cmp.ingredients.value != blank %}
-    <details>
-      <summary>Ingredientes y presentación{% render 'icon', name: 'chevron' %}</summary>
-      <div class="rte">{{ product.metafields.cmp.ingredients | metafield_tag }}</div>
-    </details>
-  {% endif %}
+  <details>
+    <summary>{% if detail_type contains 'kit' %}Qué incluye{% else %}Qué contiene y presentación{% endif %}{% render 'icon', name: 'chevron' %}</summary>
+    <div class="rte">
+      {% if product.metafields.cmp.ingredients.value != blank %}
+        {{ product.metafields.cmp.ingredients | metafield_tag }}
+      {% elsif detail_type contains 'kit' %}
+        {{ product.description }}
+        <p>La composición del kit y el papel de cada artículo se muestran más abajo en esta ficha.</p>
+      {% elsif is_device %}
+        <p>Incluye la presentación seleccionada de {{ product.title }}. Revisa el empaque para confirmar medidas, material, piezas incluidas y recomendaciones de conservación.</p>
+      {% else %}
+        <p>Consulta en el envase la fórmula, contenido neto, lote y presentación exacta del producto. Si tienes sensibilidad conocida a algún componente, revisa el listado completo antes de usarlo.</p>
+      {% endif %}
+    </div>
+  </details>
   <details>
     <summary>Cuidados y precauciones{% render 'icon', name: 'chevron' %}</summary>
     <div class="rte">
@@ -149,3 +173,12 @@
     </details>
   </div>
 </section>
+
+{% assign verified_rating = product.metafields.reviews.rating.value %}
+{% if verified_rating != blank %}
+  <section class="cmp-product-reviews" aria-labelledby="ProductReviews-{{ section.id }}">
+    <p class="eyebrow">Opiniones de clientes</p>
+    <h2 id="ProductReviews-{{ section.id }}">Reseñas verificadas</h2>
+    <p class="cmp-product-reviews__score"><strong>{{ verified_rating.rating | default: verified_rating }}</strong> de {{ verified_rating.scale_max | default: 5 }}</p>
+  </section>
+{% endif %}

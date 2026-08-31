@@ -94,23 +94,54 @@
 
         {% assign need_keys = 'hongos,resequedad,juanetes,sudor,confort,diabetes,callos,cuidado_diario' | split: ',' %}
         {% for need_key in need_keys %}
+          {% assign essential_product = blank %}
+          {% assign complete_product = blank %}
           {% case need_key %}
-            {% when 'hongos' %}{% assign result_collection = collection_hongos %}{% assign result_title = 'Cuidado para hongos' %}
-            {% when 'resequedad' %}{% assign result_collection = collection_resequedad %}{% assign result_title = 'Cuidado para resequedad' %}
-            {% when 'juanetes' %}{% assign result_collection = collection_juanetes %}{% assign result_title = 'Confort para juanetes y roce' %}
-            {% when 'sudor' %}{% assign result_collection = collection_sudor %}{% assign result_title = 'Cuidado para sudor y olor' %}
-            {% when 'confort' %}{% assign result_collection = collection_confort %}{% assign result_title = 'Confort para el día a día' %}
-            {% when 'diabetes' %}{% assign result_collection = collection_diabetes %}{% assign result_title = 'Cuidado preventivo para diabetes' %}
-            {% when 'callos' %}{% assign result_collection = collection_callos %}{% assign result_title = 'Protección para callos y presión' %}
-            {% when 'cuidado_diario' %}{% assign result_collection = collection_cuidado_diario %}{% assign result_title = 'Cuidado diario' %}
+            {% when 'hongos' %}
+              {% assign result_collection = collection_hongos %}{% assign result_title = 'Cuidado para hongos' %}
+              {% assign essential_product = all_products['solucion-antifungica-unas'] %}{% assign complete_product = all_products['kit-antihongos-unas-calzado'] %}
+            {% when 'resequedad' %}
+              {% assign result_collection = collection_resequedad %}{% assign result_title = 'Cuidado para resequedad' %}
+              {% assign essential_product = all_products['urea-40-gel'] %}{% assign complete_product = all_products['kit-talones-intensivo'] %}
+            {% when 'juanetes' %}
+              {% assign result_collection = collection_juanetes %}{% assign result_title = 'Confort para juanetes y roce' %}
+              {% assign essential_product = all_products['separador-gel-protector-juanete'] %}{% assign complete_product = all_products['kit-juanete-diario'] %}
+            {% when 'sudor' %}
+              {% assign result_collection = collection_sudor %}{% assign result_title = 'Cuidado para sudor y olor' %}
+              {% assign essential_product = all_products['antitranspirante-pies'] %}{% assign complete_product = all_products['kit-pie-calzado-sudor-olor'] %}
+            {% when 'confort' %}
+              {% assign result_collection = collection_confort %}{% assign result_title = 'Confort para el día a día' %}
+              {% assign essential_product = all_products['talonera-triple-accion'] %}
+            {% when 'diabetes' %}
+              {% assign result_collection = collection_diabetes %}{% assign result_title = 'Cuidado preventivo para diabetes' %}
+              {% assign essential_product = all_products['crema-humectante-diabetico'] %}{% assign complete_product = all_products['kit-cuidado-diario-diabetes'] %}
+            {% when 'callos' %}
+              {% assign result_collection = collection_callos %}{% assign result_title = 'Protección para callos y presión' %}
+              {% assign essential_product = all_products['protector-punto-de-gel'] %}{% assign complete_product = all_products['kit-dedos-sin-roce'] %}
+            {% when 'cuidado_diario' %}
+              {% assign result_collection = collection_cuidado_diario %}{% assign result_title = 'Cuidado diario' %}
+              {% assign essential_product = all_products['pedicreme-mousse-relajante'] %}
           {% endcase %}
           <div data-routine-result="{{ need_key }}" hidden>
-            <div class="cmp-routine-result__heading"><p class="eyebrow">Tu punto de partida</p><h2>{{ result_title }}</h2><p>Esta selección es orientativa. Lee la ficha y precauciones de cada producto antes de usarlo.</p></div>
-            {% if result_collection != blank and result_collection.products_count > 0 %}
-              <div class="cmp-product-grid">
-                {% for card_product in result_collection.products limit: 3 %}{% render 'product-card', card_product: card_product, quick_add: true %}{% endfor %}
+            <div class="cmp-routine-result__heading"><p class="eyebrow">Tu punto de partida</p><h2>{{ result_title }}</h2><p>Elige el nivel de rutina que prefieres. Esta selección es orientativa: revisa la ficha y las precauciones antes de usar cada producto.</p></div>
+            {% if essential_product != blank %}
+              <div class="cmp-routine-recommendation" data-routine-mode="simple">
+                <div class="cmp-routine-recommendation__copy"><span>Opción esencial</span><h3>Empieza con un paso claro</h3><p>Una alternativa para atender la necesidad principal con una compra más sencilla.</p></div>
+                <div class="cmp-routine-recommendation__product">{% render 'product-card', card_product: essential_product, quick_add: true %}</div>
               </div>
-              <a class="button button--secondary" href="{{ result_collection.url }}">Ver toda la selección</a>
+            {% endif %}
+            {% if complete_product != blank %}
+              <div class="cmp-routine-recommendation cmp-routine-recommendation--complete" data-routine-mode="complete">
+                <div class="cmp-routine-recommendation__copy"><span>Rutina completa · recomendada</span><h3>Reúne los pasos complementarios</h3><p>Una opción organizada para no elegir producto por producto.</p></div>
+                <div class="cmp-routine-recommendation__product">{% render 'product-card', card_product: complete_product, quick_add: true %}</div>
+              </div>
+            {% elsif result_collection != blank and result_collection.products_count > 0 %}
+              <div class="cmp-routine-recommendation cmp-routine-recommendation--complete" data-routine-mode="complete">
+                <div class="cmp-routine-recommendation__copy"><span>Rutina completa</span><h3>Construye tu selección</h3><p>Explora opciones complementarias según la zona y el tipo de confort que necesitas.</p><a class="button button--primary" href="{{ result_collection.url }}">Ver opciones</a></div>
+              </div>
+            {% endif %}
+            {% if result_collection != blank and result_collection.products_count > 0 %}
+              <a class="button button--secondary cmp-routine-more" href="{{ result_collection.url }}">Comparar toda la selección</a>
             {% else %}
               <div class="cmp-editor-note">Asigna la colección “{{ result_title }}” en el editor del tema.</div>
             {% endif %}
