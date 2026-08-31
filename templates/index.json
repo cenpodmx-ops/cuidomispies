@@ -4,11 +4,11 @@
       "type": "cmp-hero",
       "settings": {
         "eyebrow": "Bienestar y cuidado diario",
-        "heading": "Cuida tus pies con claridad y confianza",
-        "text": "<p>Soluciones organizadas por necesidad, rutinas sencillas y orientación para elegir mejor.</p>",
+        "heading": "Cuidado profesional para cada paso",
+        "text": "<p>Soluciones especializadas para el cuidado diario de tus pies.</p>",
         "primary_label": "Encontrar mi solución",
         "primary_link": "/pages/encuentra-tu-rutina",
-        "secondary_label": "Explorar por necesidad",
+        "secondary_label": "Explorar productos",
         "secondary_link": "/collections/all",
         "microcopy": "Envíos a todo México · Compra segura · Respaldo profesional"
       }
