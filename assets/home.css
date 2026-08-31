@@ -86,7 +86,7 @@
   .cmp-hero--default-banner { display: grid; min-height: 0; overflow: hidden; background: #fafaf7; }
   .cmp-hero--default-banner .cmp-hero__picture { position: relative; inset: auto; height: clamp(16.5rem, 70vw, 18.5rem); overflow: hidden; background: #fff; }
   .cmp-hero--default-banner .cmp-hero__picture::after { background: linear-gradient(180deg, rgba(255,255,255,0) 56%, rgba(255,255,255,.55) 83%, #fafaf7 100%); }
-  .cmp-hero--default-banner .cmp-hero__picture img { object-position: 76% center; transform: scale(1.32); transform-origin: 76% 46%; }
+  .cmp-hero--default-banner .cmp-hero__picture img { object-position: 100% center; transform: scale(1.32); transform-origin: 100% 46%; }
   .cmp-hero--default-banner .cmp-hero__inner { z-index: 2; width: calc(100% - 1rem); min-height: 0; margin-top: -1.7rem; padding-block: 0 1.25rem; }
   .cmp-hero--default-banner .cmp-hero__content { padding: 1.15rem 1.1rem; border: 1px solid rgb(23 107 107 / 10%); border-radius: 1.35rem; background: rgb(255 255 255 / 94%); box-shadow: 0 18px 40px rgb(18 72 65 / 10%); backdrop-filter: blur(10px); }
   .cmp-hero--default-banner .cmp-hero__embedded-title,
