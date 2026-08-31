@@ -22,7 +22,7 @@
               <div class="cmp-cart-page__details">
                 <div>
                   <a class="cmp-cart-page__title" href="{{ item.url }}">{{ item.product.title }}</a>
-                  {% unless item.product.has_only_default_variant %}<p>{{ item.variant.title }}</p>{% endunless %}
+                  {% unless item.product.has_only_default_variant or item.variant.title == 'Default Title' %}<p>{{ item.variant.title }}</p>{% endunless %}
                   {% for property in item.properties %}
                     {% assign property_first = property.first | slice: 0 %}
                     {% unless property.last == blank or property_first == '_' %}<p>{{ property.first }}: {{ property.last }}</p>{% endunless %}

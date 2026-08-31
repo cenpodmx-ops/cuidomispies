@@ -2,6 +2,11 @@
   assign card_variant = card_product.selected_or_first_available_variant
   assign card_badge = card_product.metafields.cmp.badge.value
   assign card_image = card_product.featured_media.preview_image
+  assign card_variant_title_downcase = card_variant.title | downcase
+  assign card_has_simple_variant = card_product.has_only_default_variant
+  if card_product.variants.size == 1 and card_variant_title_downcase == 'default title'
+    assign card_has_simple_variant = true
+  endif
 %}
 
 <article class="cmp-product-card">
@@ -34,7 +39,7 @@
     {% render 'price', product: card_product %}
 
     {% if quick_add %}
-      {% if card_product.has_only_default_variant and card_product.available %}
+      {% if card_has_simple_variant and card_product.available %}
         <form method="post" action="{{ routes.cart_add_url }}" data-product-form>
           <input type="hidden" name="id" value="{{ card_variant.id }}">
           <input type="hidden" name="quantity" value="1">

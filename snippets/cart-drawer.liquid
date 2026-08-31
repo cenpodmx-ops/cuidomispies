@@ -50,7 +50,7 @@
           <div class="cmp-cart-item__content">
             <div>
               <a class="cmp-cart-item__title" href="{{ item.url }}">{{ item.product.title }}</a>
-              {% unless item.product.has_only_default_variant %}
+              {% unless item.product.has_only_default_variant or item.variant.title == 'Default Title' %}
                 <p class="cmp-cart-item__variant">{{ item.variant.title }}</p>
               {% endunless %}
             </div>

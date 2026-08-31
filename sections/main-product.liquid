@@ -6,6 +6,11 @@
   assign cross_sell = product.metafields.cmp.cross_sell.value
   assign product_type_downcase = product.type | downcase
   assign product_title_downcase = product.title | downcase
+  assign current_variant_title_downcase = current_variant.title | downcase
+  assign show_variant_selector = true
+  if product.has_only_default_variant or product.variants.size == 1 and current_variant_title_downcase == 'default title'
+    assign show_variant_selector = false
+  endif
 
   if related_kit == blank and product_type_downcase contains 'hongos'
     if product_title_downcase contains 'crema' or product_title_downcase contains 'talco'
@@ -96,7 +101,7 @@
         </ul>
 
         <form class="cmp-product-form" method="post" action="{{ routes.cart_add_url }}" enctype="multipart/form-data" data-product-form>
-          {% unless product.has_only_default_variant %}
+          {% if show_variant_selector %}
             <label for="Variant-{{ section.id }}">Presentación</label>
             <select id="Variant-{{ section.id }}" name="id" data-variant-select>
               {% for variant in product.variants %}
@@ -107,7 +112,7 @@
             </select>
           {% else %}
             <input type="hidden" name="id" value="{{ current_variant.id }}">
-          {% endunless %}
+          {% endif %}
 
           <div class="cmp-product-form__row">
             <div class="quantity-selector" data-quantity>
