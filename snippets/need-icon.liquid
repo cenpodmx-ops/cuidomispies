@@ -1,22 +1,35 @@
 {% liquid
   assign need_icon = icon | default: 'foot'
+  assign need_image = blank
   case title
     when 'Hongos'
       assign need_icon = 'fungus'
+      assign need_image = 'cmp-category-hongos.jpg'
     when 'Cuidado en diabetes', 'Cuidado del pie en diabetes'
       assign need_icon = 'diabetes'
+      assign need_image = 'cmp-category-diabetes.jpg'
     when 'Talones y piel seca'
       assign need_icon = 'dry-skin'
+      assign need_image = 'cmp-category-talones.jpg'
     when 'Sudor y mal olor'
       assign need_icon = 'odor'
+      assign need_image = 'cmp-category-sudor.jpg'
     when 'Juanetes y dedos'
       assign need_icon = 'bunion'
+      assign need_image = 'cmp-category-juanetes.jpg'
     when 'Callos, roce y presión'
       assign need_icon = 'callus'
+      assign need_image = 'cmp-category-callos.jpg'
     when 'Talón y confort'
       assign need_icon = 'heel'
+      assign need_image = 'cmp-category-confort.jpg'
     when 'Kits por necesidad', 'Kits'
       assign need_icon = 'kit'
+      assign need_image = 'cmp-category-kits.jpg'
   endcase
 %}
-{% render 'icon', name: need_icon %}
+{% if need_image != blank %}
+  <img class="cmp-need-visual" src="{{ need_image | asset_url }}" width="76" height="76" loading="lazy" alt="">
+{% else %}
+  {% render 'icon', name: need_icon %}
+{% endif %}
